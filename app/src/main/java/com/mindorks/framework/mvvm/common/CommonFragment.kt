@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import com.mindorks.framework.mvvm.ui.main.view.MainNewActivity
 
 abstract class CommonFragment<VB : ViewBinding,VM : BaseViewModel> : Fragment(), IScreen {
 
@@ -40,6 +41,12 @@ abstract class CommonFragment<VB : ViewBinding,VM : BaseViewModel> : Fragment(),
     }
 
     override fun initObserver() {
+    }
+
+    protected open fun getMainActivity(): MainNewActivity? {
+        return if (activity is MainNewActivity) {
+            activity as MainNewActivity?
+        } else null
     }
 
 }

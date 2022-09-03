@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.mindorks.framework.mvvm.common.ToolbarCustomer
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:txt_toolbar="Thông tin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Lưu"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:backgroundTint="@android:color/black"
+                android:layout_height="wrap_content"
+                android:hint="Tên đăng nhập"
+                android:padding="10dp"
+                android:textColorHint="@android:color/black"
+                android:background="@drawable/ic_frame_36569" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="Địa chỉ email"
+                android:textColorHint="@android:color/black"
+                android:backgroundTint="@android:color/black"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_frame_36569" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:textColorHint="@android:color/black"
+                android:layout_height="wrap_content"
+                android:hint="Số điện thoại"
+                android:backgroundTint="@android:color/black"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_frame_36569" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:textColorHint="@android:color/black"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@android:color/black"
+                android:background="@drawable/ic_frame_36569"
+                tools:targetApi="lollipop" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColorHint="@android:color/black"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@android:color/black"
+                android:background="@drawable/ic_frame_36569" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

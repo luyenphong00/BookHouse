@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvvm.ui.main.view
 
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.mindorks.framework.mvvm.R
@@ -22,6 +23,7 @@ class MainNewActivity : CommonActivity<BaseViewModel,ActivityMainNewBinding>() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.message -> {
+                    Navigation.findNavController(this,R.id.nav_host_fragment).navigate(R.id.action_history)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.settings -> {
@@ -34,4 +36,6 @@ class MainNewActivity : CommonActivity<BaseViewModel,ActivityMainNewBinding>() {
             }
         }
     }
+
+
 }

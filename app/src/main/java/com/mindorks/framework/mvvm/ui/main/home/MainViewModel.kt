@@ -1,4 +1,4 @@
-package com.mindorks.framework.mvvm.ui.main.viewmodel
+package com.mindorks.framework.mvvm.ui.main.home
 
 import androidx.lifecycle.*
 import com.mindorks.framework.mvvm.data.model.User

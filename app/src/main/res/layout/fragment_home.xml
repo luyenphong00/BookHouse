@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image"
@@ -16,6 +19,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="@id/image"
         app:layout_constraintStart_toEndOf="@id/image"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:text="Chao ban"
         android:layout_height="wrap_content"/>
@@ -28,6 +32,51 @@
         android:layout_width="wrap_content"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintBottom_toBottomOf="@id/image"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        android:layout_width="wrap_content"
+        android:text="Danh sách phòng họp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcl_house"
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        tools:listitem="@layout/item_house"
+        app:layout_constraintTop_toBottomOf="@id/label1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label2"
+        app:layout_constraintStart_toStartOf="@id/label1"
+        app:layout_constraintTop_toBottomOf="@+id/rcl_house"
+        android:layout_width="wrap_content"
+        android:text="Phòng mới thêm"
+        android:layout_marginTop="6dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcl_house_new"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="10dp"
+        tools:listitem="@layout/item_house_new"
+        app:layout_constraintTop_toBottomOf="@id/label2"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
