@@ -5,13 +5,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
 import com.mindorks.framework.mvvm.databinding.ItemHouseBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseNewBinding
 
-class HouseAdapter(var context: Context, var type: Int, private var onClick: (String) -> Unit) :
+class HouseAdapter(var context: Context, var type: Int, private var onClick: (DataResponseDepartment) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var listLanguage = mutableListOf<String>()
+    private var lstHouse = mutableListOf<DataResponseDepartment>()
 
     override fun getItemViewType(position: Int): Int {
         if (type == 0)
@@ -22,17 +24,31 @@ class HouseAdapter(var context: Context, var type: Int, private var onClick: (St
     inner class ViewHolder1(var binding: ItemHouseBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-
+            if (lstHouse.isNotEmpty()){
+                val item = lstHouse[position]
+                binding.tvName.text = item.name
+                binding.price.text = item.price
+                if (item.active == false){
+                    binding.status.text = "Da thue"
+                }
+                val linkUrl = "http://192.168.0.108/DoAnDuongDucThang/public/" + item.image
+                Glide.with(context)
+                    .load(linkUrl)
+                    .into(binding.image)
+                binding.root.setOnClickListener {
+                    onClick.invoke(item)
+                }
+            }
         }
     }
 
-    fun updateData(list: ArrayList<String>) {
-        listLanguage.clear()
-        listLanguage.addAll(list)
+    fun updateData(list: ArrayList<DataResponseDepartment>) {
+        lstHouse.clear()
+        lstHouse.addAll(list)
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = listLanguage.size
+    override fun getItemCount(): Int = lstHouse.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == 0) {

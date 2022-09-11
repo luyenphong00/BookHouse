@@ -41,24 +41,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        mainViewModel.users.observe(this, Observer {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    progressBar.visibility = View.GONE
-                    it.data?.let { users -> renderList(users) }
-                    recyclerView.visibility = View.VISIBLE
-                }
-                Status.LOADING -> {
-                    progressBar.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                }
-                Status.ERROR -> {
-                    //Handle Error
-                    progressBar.visibility = View.GONE
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
+//        mainViewModel.users.observe(this, Observer {
+//            when (it.status) {
+//                Status.SUCCESS -> {
+//                    progressBar.visibility = View.GONE
+//                    it.data?.let { users -> renderList(users) }
+//                    recyclerView.visibility = View.VISIBLE
+//                }
+//                Status.LOADING -> {
+//                    progressBar.visibility = View.VISIBLE
+//                    recyclerView.visibility = View.GONE
+//                }
+//                Status.ERROR -> {
+//                    //Handle Error
+//                    progressBar.visibility = View.GONE
+//                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+//                }
+//            }
+//        })
     }
 
     private fun renderList(users: List<User>) {

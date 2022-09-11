@@ -1,18 +1,26 @@
 package com.mindorks.framework.mvvm.ui.main.view
 
-import androidx.activity.viewModels
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.mindorks.framework.mvvm.R
-import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonActivity
+import com.mindorks.framework.mvvm.data.model.DetailUserModel
+import com.mindorks.framework.mvvm.data.model.UserModel
 import com.mindorks.framework.mvvm.databinding.ActivityMainNewBinding
+import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainNewActivity : CommonActivity<BaseViewModel,ActivityMainNewBinding>() {
-    override val viewModel: ViewModel by viewModels()
+class MainNewActivity : CommonActivity<MainViewModel,ActivityMainNewBinding>() {
+    override val viewModel: MainViewModel by viewModel()
 
     override fun getViewBinding(): ActivityMainNewBinding = ActivityMainNewBinding.inflate(layoutInflater)
+
+    override fun initData() {
+        super.initData()
+        intent.extras?.getParcelable<UserModel>("param")?.let {
+            viewModel.userModel = it
+        }
+    }
 
     override fun initEvent() {
         super.initEvent()

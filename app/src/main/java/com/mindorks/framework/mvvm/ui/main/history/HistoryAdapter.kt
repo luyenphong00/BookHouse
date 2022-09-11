@@ -5,17 +5,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mindorks.framework.mvvm.data.model.Result
 import com.mindorks.framework.mvvm.databinding.ItemHouseActiveBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseBinding
+import com.mindorks.framework.mvvm.databinding.ItemHouseNewBinding
 
-class HistoryAdapter(context: Context, private var onClick : (String) -> Unit) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter(context: Context, private var onClick : (Result) -> Unit) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    private var listLanguage = mutableListOf<String>()
+    private var listLanguage = mutableListOf<Result>()
 
-    inner class ViewHolder(var binding: ItemHouseActiveBinding) :
+    inner class ViewHolder(var binding: ItemHouseNewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    fun updateData(list: ArrayList<String>) {
+    fun updateData(list: ArrayList<Result>) {
         listLanguage.clear()
         listLanguage.addAll(list)
         notifyDataSetChanged()
@@ -25,7 +27,7 @@ class HistoryAdapter(context: Context, private var onClick : (String) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding =
-            ItemHouseActiveBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemHouseNewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 

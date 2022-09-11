@@ -19,18 +19,8 @@ class DetailHistoryFragment : CommonFragment<FragmentHistoryBinding,BaseViewMode
         historyAdapter = HistoryAdapter(requireContext()) {
 
         }
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
-        lstFake.add("")
+
         binding.rclHistory.adapter = historyAdapter
-        historyAdapter?.updateData(lstFake as ArrayList<String>)
     }
 
     override fun initView() {

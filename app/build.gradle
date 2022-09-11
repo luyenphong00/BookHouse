@@ -17,7 +17,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField 'String', 'BASE_URL', "\"https://5e510330f2c0d300147c034c.mockapi.io/\""
+        buildConfigField 'String', 'BASE_URL', "\"http://192.168.0.108/DoAnDuongDucThang/server.php/api/\""
 
     }
 
@@ -89,5 +89,6 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:4.2.2'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 }

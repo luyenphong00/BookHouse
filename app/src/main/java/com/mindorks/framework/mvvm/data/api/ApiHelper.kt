@@ -1,8 +1,6 @@
 package com.mindorks.framework.mvvm.data.api
 
-import com.mindorks.framework.mvvm.data.model.DetailUserModel
-import com.mindorks.framework.mvvm.data.model.ResponseUser
-import com.mindorks.framework.mvvm.data.model.User
+import com.mindorks.framework.mvvm.data.model.*
 import retrofit2.Response
 
 interface ApiHelper {
@@ -13,5 +11,19 @@ interface ApiHelper {
 
     suspend fun getListUsers(): Response<ResponseUser>
 
-    suspend fun login() : Response<String>
+    suspend fun login(loginBody: LoginBody) : Response<DetailUserModel>
+
+    suspend fun updateUser(userModel : UserModel) : Response<UserModel>
+
+    suspend fun equipments() : Response<EquipmentsResponse>
+
+    suspend fun services() : Response<EquipmentsResponse>
+
+    suspend fun fetChMeetingRoom() : Response<DepartmentsModel>
+
+    suspend fun getRentals(id : Int) : Response<DepartmentsModel>
+
+    suspend fun rentalsGetMettingRoom(id : Int) : Response<EntalsGetMettingModel>
+
+//    suspend fun updateUser(userModel: UserModel) : Re
 }

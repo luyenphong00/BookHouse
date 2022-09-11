@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"/>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
         android:layout_marginBottom="16dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -41,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/image"
         android:layout_width="wrap_content"
         android:text="Danh sách phòng họp"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:layout_height="wrap_content"/>
@@ -50,32 +51,11 @@
         android:id="@+id/rcl_house"
         android:layout_marginTop="6dp"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
         tools:listitem="@layout/item_house"
         app:layout_constraintTop_toBottomOf="@id/label1"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_height="wrap_content"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/label2"
-        app:layout_constraintStart_toStartOf="@id/label1"
-        app:layout_constraintTop_toBottomOf="@+id/rcl_house"
-        android:layout_width="wrap_content"
-        android:text="Phòng mới thêm"
-        android:layout_marginTop="6dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_height="wrap_content"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcl_house_new"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="6dp"
-        android:layout_marginHorizontal="10dp"
-        tools:listitem="@layout/item_house_new"
-        app:layout_constraintTop_toBottomOf="@id/label2"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="wrap_content"/>
 

@@ -14,6 +14,7 @@
         app:txt_toolbar="Thông tin" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"
@@ -39,52 +40,61 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
-                android:backgroundTint="@android:color/black"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:background="@drawable/ic_frame_36569"
+                android:backgroundTint="@android:color/black"
                 android:hint="Tên đăng nhập"
                 android:padding="10dp"
-                android:textColorHint="@android:color/black"
-                android:background="@drawable/ic_frame_36569" />
+                android:textColorHint="#A8A8A8" />
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:hint="Địa chỉ email"
-                android:textColorHint="@android:color/black"
-                android:backgroundTint="@android:color/black"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/ic_frame_36569" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:layout_width="match_parent"
-                android:padding="10dp"
-                android:textColorHint="@android:color/black"
-                android:layout_height="wrap_content"
-                android:hint="Số điện thoại"
-                android:backgroundTint="@android:color/black"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/ic_frame_36569" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:layout_width="match_parent"
-                android:padding="10dp"
-                android:textColorHint="@android:color/black"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@android:color/black"
+                android:textColor="@android:color/black"
                 android:background="@drawable/ic_frame_36569"
+                android:backgroundTint="@android:color/black"
+                android:hint="Địa chỉ email"
+                android:padding="10dp"
+                android:textColorHint="#A8A8A8" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/ic_frame_36569"
+                android:backgroundTint="@android:color/black"
+                android:hint="Số điện thoại"
+                android:padding="10dp"
+                android:textColorHint="#A8A8A8" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/ic_frame_36569"
+                android:backgroundTint="@android:color/black"
+                android:hint="Địa chỉ"
+                android:padding="10dp"
+                android:textColorHint="#A8A8A8"
                 tools:targetApi="lollipop" />
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nationality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColorHint="@android:color/black"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@android:color/black"
-                android:background="@drawable/ic_frame_36569" />
+                android:hint="Quoc gia"
+                android:padding="10dp"
+                android:textColorHint="#A8A8A8" />
 
         </LinearLayout>
 

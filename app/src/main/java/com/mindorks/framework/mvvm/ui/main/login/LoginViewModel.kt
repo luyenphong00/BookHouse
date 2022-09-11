@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mindorks.framework.mvvm.data.api.ApiHelper
+import com.mindorks.framework.mvvm.data.model.DetailUserModel
+import com.mindorks.framework.mvvm.data.model.LoginBody
 import com.mindorks.framework.mvvm.data.repository.MainRepository
 import com.mindorks.framework.mvvm.utils.NetworkHelper
 import com.mindorks.framework.mvvm.utils.Resource
@@ -14,12 +16,13 @@ class LoginViewModel(private val mainRepository: MainRepository,
                      private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
-    var loginResponse = MutableLiveData<Resource<String>>()
+    var loginResponse = MutableLiveData<Resource<DetailUserModel>>()
 
-    fun login(){
+    fun login(loginBody: LoginBody){
         viewModelScope.launch(IO){
+            loginResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
-                mainRepository.login().let {
+                mainRepository.login(loginBody).let {
                     if (it.isSuccessful) {
                         loginResponse.postValue(Resource.success(it.body()))
                     } else {
