@@ -9,21 +9,24 @@ import com.mindorks.framework.mvvm.data.model.Result
 import com.mindorks.framework.mvvm.databinding.ItemHouseActiveBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseNewBinding
+import com.mindorks.framework.mvvm.utils.Utils
 
 class HistoryAdapter(context: Context, private var onClick : (Result) -> Unit) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    private var listLanguage = mutableListOf<Result>()
+    private var lstHistory = mutableListOf<Result>()
 
     inner class ViewHolder(var binding: ItemHouseNewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     fun updateData(list: ArrayList<Result>) {
-        listLanguage.clear()
-        listLanguage.addAll(list)
+        lstHistory.clear()
+        if (lstHistory.isNotEmpty()){
+            lstHistory.addAll(list)
+        }
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = listLanguage.size
+    override fun getItemCount(): Int = lstHistory.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding =
@@ -34,7 +37,11 @@ class HistoryAdapter(context: Context, private var onClick : (Result) -> Unit) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
-        val item = listLanguage[position]
+        val item = lstHistory[position]
+
+        with(binding){
+            price.text = Utils.currencyFormat(item.totalMoney?:"")
+        }
         binding.root.setOnClickListener {
             onClick.invoke(item)
         }

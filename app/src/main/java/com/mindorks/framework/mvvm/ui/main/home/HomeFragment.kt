@@ -51,7 +51,6 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        getMainActivity()?.dismiss()
                         resource.data?.let { result ->
                             if (result.data?.isNotEmpty() == true){
                                 viewModel.checkHouseActive()
@@ -79,10 +78,10 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
                         }
                     }
                     Status.ERROR -> {
-//                        getMainActivity()?.dismiss()
+                        getMainActivity()?.dismiss()
                     }
                     Status.LOADING -> {
-//                        getMainActivity()?.showLoading()
+                        getMainActivity()?.showLoading()
                     }
                 }
             }

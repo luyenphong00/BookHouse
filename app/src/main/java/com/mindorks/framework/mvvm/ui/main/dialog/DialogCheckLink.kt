@@ -27,10 +27,6 @@ class DialogCheckLink(
     }
 
     private fun initUI() {
-        with(binding){
-           cancelButton.setOnClickListener {
-               dismiss()
-           }
-        }
+
     }
 }

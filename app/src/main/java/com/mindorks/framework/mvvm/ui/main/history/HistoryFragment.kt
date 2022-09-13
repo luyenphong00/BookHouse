@@ -40,7 +40,7 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
                 when(source.status){
                     Status.SUCCESS -> {
                         getMainActivity()?.dismiss()
-                        historyAdapter?.updateData(source.data?.data?: ArrayList())
+//                        historyAdapter?.updateData(source.data?.data?: ArrayList())
                     }
                     Status.ERROR -> {
                         getMainActivity()?.dismiss()

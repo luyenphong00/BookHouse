@@ -44,7 +44,17 @@ data class EntalsGetMettingModel(@SerializedName("data") val data: ArrayList<Res
 data class Result(
     @SerializedName("id") var id: Long?,
     @SerializedName("meeting_room_id") var meetId: Long?,
-    @SerializedName("user_id") var userId : String?
+    @SerializedName("user_id") var userId: String?,
+    @SerializedName("total_money") var totalMoney: String?,
+    @SerializedName("rental_services") var rentalServices: ArrayList<RentalServices>?
+)
+
+data class RentalServices(
+    @SerializedName("id") var id: Long?,
+    @SerializedName("service_id") var service_id: Long?,
+    @SerializedName("quantity") var quantity: Long?,
+    @SerializedName("rental_history_id") var rentalHistoryId: Long?,
+    @SerializedName("created_at") var createdAt: String?,
 )
 
 data class LoginBody(
