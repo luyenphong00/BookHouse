@@ -21,7 +21,7 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
     override fun initData() {
         super.initData()
         sharedViewModel.userModel?.let {
-            viewModel.getRentalsToMettingRoom(it.id)
+            it.id?.let { it1 -> viewModel.getRentalsToMettingRoom(it1) }
         }
         historyAdapter = HistoryAdapter(requireContext()) {
 

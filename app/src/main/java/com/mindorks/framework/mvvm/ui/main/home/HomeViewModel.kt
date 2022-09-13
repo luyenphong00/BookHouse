@@ -25,7 +25,7 @@ class HomeViewModel(
     val meetingRoomsResponse = MutableLiveData<Resource<DepartmentsModel>>()
     val lstHouseUpdate = MutableLiveData<Resource<MutableList<DataResponseDepartment>>>()
 
-    fun getMeetingRooms(){
+    fun getMeetingRooms() {
         viewModelScope.launch(IO) {
             meetingRoomsResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
@@ -33,37 +33,42 @@ class HomeViewModel(
                     if (it.isSuccessful) {
                         it.body()?.let { departMent ->
                             departMent.data?.let { list ->
-                                if (list.isNotEmpty()){
+                                if (list.isNotEmpty()) {
                                     lstHouseHome.clear()
                                     lstHouseHome.addAll(list)
                                 }
                             }
                         }
                         meetingRoomsResponse.postValue(Resource.success(it.body()))
-                    } else meetingRoomsResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    } else meetingRoomsResponse.postValue(
+                        Resource.error(
+                            it.errorBody().toString(),
+                            null
+                        )
+                    )
                 }
             } else meetingRoomsResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 
-    fun checkHouseActive(){
+    fun checkHouseActive() {
         viewModelScope.launch(IO) {
             lstHouseUpdate.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 supervisorScope {
-                    if (lstHouseHome.isNotEmpty()){
+                    if (lstHouseHome.isNotEmpty()) {
                         lstHouseHome.forEach {
                             val response = mainRepository.getRentals(it.id)
-                            response.let { reponse->
-                            if (reponse.isSuccessful){
-                                it.active = reponse.body()?.data?.isNotEmpty() != true
-                            }else {
-                                it.active = true
-                            }
+                            response.let { reponse ->
+                                if (reponse.isSuccessful) {
+                                    it.active = reponse.body()?.data?.isNotEmpty() != true
+                                } else {
+                                    it.active = true
+                                }
                             }
                         }
                         lstHouseUpdate.postValue(Resource.success(lstHouseHome))
-                    }else {
+                    } else {
                         lstHouseUpdate.postValue(Resource.success(null))
                     }
                 }

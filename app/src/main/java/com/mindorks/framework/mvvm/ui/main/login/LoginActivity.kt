@@ -24,12 +24,6 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
         with(binding) {
             submit.setOnClickListener {
                 viewModel.login(LoginBody("Admin", "c"))
-//                Handler(Looper.getMainLooper()).postDelayed({
-//                    startActivity(Intent(this@LoginActivity,MainNewActivity::class.java))
-//                    dialog?.dismiss()
-//                    finish()
-//                }, 2000)
-
             }
         }
     }

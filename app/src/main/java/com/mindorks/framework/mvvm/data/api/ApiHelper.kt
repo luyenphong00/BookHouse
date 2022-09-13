@@ -25,5 +25,4 @@ interface ApiHelper {
 
     suspend fun rentalsGetMettingRoom(id : Int) : Response<EntalsGetMettingModel>
 
-//    suspend fun updateUser(userModel: UserModel) : Re
 }

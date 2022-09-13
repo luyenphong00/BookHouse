@@ -23,8 +23,8 @@ interface ApiService {
     suspend fun getUser(@Query("id") id : String) : Response<DetailUserModel>
 
     // http://127.0.0.1:8000/api/users/1?addresses=HaNoi&phone=0386592323
-    @PUT("users")
-    suspend fun updateUser(@Body userModel: UserModel) : Response<UserModel>
+    @POST("users")
+    suspend fun updateUser(@Body userModel: UserModel) : Response<DetailUserModel>
 
     // http://127.0.0.1:8000/api/departments
     @GET("departments")
@@ -51,8 +51,8 @@ interface ApiService {
     suspend fun meetingRooms() : Response<DepartmentsModel>
 
     // http://127.0.0.1:8000/api/rentals?meeting_room_id=1
-    @GET("meeting-rooms")
-    suspend fun getRentals(@Query("id") id : Int) : Response<DepartmentsModel>
+    @GET("rentals")
+    suspend fun getRentals(@Query("meeting_room_id") id : Int) : Response<DepartmentsModel>
 
     // http://127.0.0.1:8000/api/rentals_get_metting_room_of_user?user_id=1
     @GET("rentals_get_metting_room_of_user")

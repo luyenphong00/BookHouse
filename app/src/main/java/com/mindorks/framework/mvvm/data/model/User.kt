@@ -18,8 +18,8 @@ data class User(
 )
 
 open class BaseModel(
-    @Json(name = "status") val status: Int? = 0,
-    @Json(name = "message") val message: String? = ""
+    @SerializedName("status") val status: Int? = 0,
+    @SerializedName("message") val message: String? = ""
 )
 
 data class DepartmentsModel(
@@ -60,24 +60,22 @@ data class DetailUserModel(@SerializedName("data") val data: UserModel?) : BaseM
 
 @Parcelize
 data class UserModel(
-    @SerializedName("id") val id: Int,
-    @SerializedName("fullname") val fullname: String?,
-    @SerializedName("email") val email: String?,
-    @SerializedName("activated") val activated: Int,
-    @SerializedName("code") val code: String?,
-    @SerializedName("address") val addresses: String?,
-    @SerializedName("nationality") val nationality: String?,
-    @SerializedName("gender") val gender: Int?,
-    @SerializedName("id_card_no") val id_card_no: String?,
-    @SerializedName("date_of_birth") val date_of_birth: String?,
-    @SerializedName("issued_on") val issued_on: String?,
-    @SerializedName("issued_at") val issued_at: String?,
-    @SerializedName("department_id") val department_id: Int?,
-    @SerializedName("phone") val phone: String?,
-    @SerializedName("marital_status") val marital_status: Int?,
-    @SerializedName("ethnicity") val ethnicity: String?,
-    @SerializedName("domicile") val domicile: String?,
-    @SerializedName("admin") val admin: Int?,
+    @SerializedName("id") var id: Int?,
+    @SerializedName("fullname") var fullname: String?,
+    @SerializedName("email") var email: String?,
+    @SerializedName("addresses") var addresses: String?,
+    @SerializedName("nationality") var nationality: String?,
+    @SerializedName("gender") var gender: Int?,
+    @SerializedName("id_card_no") var id_card_no: String?,
+    @SerializedName("date_of_birth") var date_of_birth: String?,
+    @SerializedName("issued_on") var issued_on: String?,
+    @SerializedName("issued_at") var issued_at: String?,
+    @SerializedName("department_id") var department_id: Int?,
+    @SerializedName("phone") var phone: String?,
+    @SerializedName("marital_status") var marital_status: Int?,
+    @SerializedName("ethnicity") var ethnicity: String?,
+    @SerializedName("domicile") var domicile: String?,
+    @SerializedName("admin") var admin: Int?,
 ) : Parcelable
 
 data class EquipmentsResponse(@Json(name = "data") val data: ArrayList<EquipmentModel>?) :
