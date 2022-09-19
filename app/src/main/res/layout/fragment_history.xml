@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_margin="16dp"
         android:hint="Tìm kiếm"
+        android:textSize="13sp"
         android:background="@drawable/ic_frame_36569"
         android:layout_height="wrap_content"/>
 
@@ -27,6 +28,7 @@
         android:layout_width="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

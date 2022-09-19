@@ -6,11 +6,15 @@ import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonFragment
 import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
 import com.mindorks.framework.mvvm.databinding.FragmentHouseDetailBinding
+import com.mindorks.framework.mvvm.ui.main.adapter.DeviceAdapter
+import com.mindorks.framework.mvvm.ui.main.viewmodel.DetailModel
+import com.mindorks.framework.mvvm.utils.Status
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewModel>() {
-    override val viewModel: ViewModel by viewModel()
+    override val viewModel: DetailModel by viewModel()
+    private var adapter : DeviceAdapter? = null
 
     override fun getViewBinding(): FragmentHouseDetailBinding =
         FragmentHouseDetailBinding.inflate(layoutInflater)
@@ -25,6 +29,37 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                 Glide.with(requireContext())
                     .load(linkUrl)
                     .into(img)
+            }
+            viewModel.fetchEquipments()
+        }
+
+        adapter = DeviceAdapter(requireContext()) {
+
+        }
+
+        binding.rclDevice.adapter = adapter
+    }
+
+    override fun initObserver() {
+        super.initObserver()
+        viewModel.lstEquipment.observe(viewLifecycleOwner) {
+            it?.let {  source ->
+                when(source.status){
+                    Status.SUCCESS -> {
+                        showLoading(false)
+                        source.data?.let { equipmentRes ->
+                            if (equipmentRes.data?.isNotEmpty() == true){
+                                adapter?.updateData(equipmentRes.data)
+                            }
+                        }
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
+                    }
+                    Status.LOADING -> {
+                        showLoading(true)
+                    }
+                }
             }
         }
     }

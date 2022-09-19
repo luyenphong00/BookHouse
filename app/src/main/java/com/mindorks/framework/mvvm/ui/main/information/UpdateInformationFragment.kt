@@ -51,16 +51,16 @@ class UpdateInformationFragment : CommonFragment<FragmentUpdateInforBinding,Base
             it?.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        getMainActivity()?.dismiss()
+                        getMainActivity()?.showLoading(false)
                         sharedViewModel.userModel = viewModel.userModel
                         Toast.makeText(requireContext(),"Cập nhật thành công", Toast.LENGTH_SHORT).show()
                     }
                     Status.ERROR -> {
-                        getMainActivity()?.dismiss()
+                        getMainActivity()?.showLoading(false)
                         Toast.makeText(requireContext(),"Cập nhật thất bại", Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
-                        getMainActivity()?.showLoading()
+                        getMainActivity()?.showLoading(true)
                     }
                 }
             }

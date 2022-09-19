@@ -20,6 +20,8 @@ class MainRepository (private val apiHelper: ApiService) {
 
     suspend fun getRentals(id : Int) = apiHelper.getRentals(id)
 
+    suspend fun fetchEquipments() = apiHelper.equipments()
+
     suspend fun rentalsGetMettingRoom(id : Int) = apiHelper.rentalsGetMettingRoom(id)
 
 }

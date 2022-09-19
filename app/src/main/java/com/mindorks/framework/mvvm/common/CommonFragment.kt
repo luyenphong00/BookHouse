@@ -49,4 +49,8 @@ abstract class CommonFragment<VB : ViewBinding,VM : BaseViewModel> : Fragment(),
         } else null
     }
 
+    fun showLoading(boolean: Boolean){
+        getMainActivity()?.showLoading(boolean)
+    }
+
 }

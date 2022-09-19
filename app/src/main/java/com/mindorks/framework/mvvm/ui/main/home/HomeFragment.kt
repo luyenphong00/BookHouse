@@ -57,12 +57,14 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
                                 houseAdapterType1?.updateData(result.data)
                             }
                         }
+                        getMainActivity()?.showLoading(false)
+
                     }
                     Status.ERROR -> {
-                        getMainActivity()?.dismiss()
+                        getMainActivity()?.showLoading(false)
                     }
                     Status.LOADING -> {
-                        getMainActivity()?.showLoading()
+                        getMainActivity()?.showLoading(true)
                     }
                 }
             }
@@ -72,16 +74,16 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        getMainActivity()?.dismiss()
+                        getMainActivity()?.showLoading(false)
                         if (resource.data?.isNotEmpty()== true){
                             houseAdapterType1?.updateData(resource.data as ArrayList<DataResponseDepartment>)
                         }
                     }
                     Status.ERROR -> {
-                        getMainActivity()?.dismiss()
+                        getMainActivity()?.showLoading(false)
                     }
                     Status.LOADING -> {
-                        getMainActivity()?.showLoading()
+                        getMainActivity()?.showLoading(true)
                     }
                 }
             }

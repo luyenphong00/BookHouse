@@ -1,5 +1,6 @@
 package com.mindorks.framework.mvvm.ui.main.view
 
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.mindorks.framework.mvvm.R
@@ -8,6 +9,7 @@ import com.mindorks.framework.mvvm.data.model.DetailUserModel
 import com.mindorks.framework.mvvm.data.model.UserModel
 import com.mindorks.framework.mvvm.databinding.ActivityMainNewBinding
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.item_house.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainNewActivity : CommonActivity<MainViewModel,ActivityMainNewBinding>() {
@@ -45,5 +47,8 @@ class MainNewActivity : CommonActivity<MainViewModel,ActivityMainNewBinding>() {
         }
     }
 
+    fun showLoading(boolean: Boolean){
+        binding.loading.isVisible = boolean
+    }
 
 }

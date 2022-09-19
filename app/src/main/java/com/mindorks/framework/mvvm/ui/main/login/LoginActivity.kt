@@ -2,8 +2,8 @@ package com.mindorks.framework.mvvm.ui.main.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.widget.Toast
+import androidx.core.view.isVisible
 import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonActivity
 import com.mindorks.framework.mvvm.data.model.LoginBody
@@ -34,23 +34,27 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        dialog?.dismiss()
+                        showLoading(false)
                         val intent = Intent(this@LoginActivity,MainNewActivity::class.java)
                         val bundler = Bundle()
                         bundler.putParcelable("param",resource.data?.data)
                         intent.putExtras(bundler)
                         startActivity(intent)
                         finish()
-                        dialog?.dismiss()
                     }
                     Status.ERROR -> {
-                        dialog?.dismiss()
+                        showLoading(false)
+                        showToast(resource.message.toString())
                     }
                     Status.LOADING -> {
-                        dialog?.show()
+                        showLoading(true)
                     }
                 }
             }
         }
+    }
+
+    fun showLoading(boolean: Boolean){
+        binding.loading.isVisible = boolean
     }
 }

@@ -1,55 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+    android:background="@android:color/white">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/ic_logo" />
-
-    <androidx.appcompat.widget.AppCompatEditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#454545"
-        android:layout_marginHorizontal="16dp"
-        android:textSize="12sp"
-        android:layout_marginTop="16dp"
-        android:textColor="@android:color/black"
-        android:background="@drawable/ic_frame_36569"
-        android:hint="Tên đăng nhập"
-        android:padding="8dp" />
+        android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:textSize="12sp"
-        android:layout_marginTop="16dp"
-        android:textColor="@android:color/black"
-        android:background="@drawable/ic_frame_36569"
-        android:hint="Mật khẩu"
-        android:textColorHint="#454545"
-        android:padding="8dp" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:srcCompat="@drawable/ic_logo" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_frame_36569"
+            android:hint="Tên đăng nhập"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="#454545"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_frame_36569"
+            android:hint="Mật khẩu"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="#454545"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_bg_button"
+            android:gravity="center"
+            android:text="Đăng nhập"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
         android:layout_gravity="center"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/ic_bg_button"
-        android:gravity="center"
-        android:text="Đăng nhập"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_default" />
 
-
-</LinearLayout>
+</RelativeLayout>

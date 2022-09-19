@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvvm.common
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
@@ -11,13 +12,11 @@ abstract class CommonActivity<VM : ViewModel, B : ViewBinding> : AppCompatActivi
 
     lateinit var binding: B
     protected abstract val viewModel: ViewModel
-    protected var dialog : DialogCheckLink? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = getViewBinding()
         setContentView(binding.root)
-        dialog = DialogCheckLink(this)
         initData()
         initView()
         initEvent()
@@ -38,12 +37,8 @@ abstract class CommonActivity<VM : ViewModel, B : ViewBinding> : AppCompatActivi
 
     abstract fun getViewBinding(): B
 
-    fun showLoading(){
-        dialog?.show()
-    }
-
-    fun dismiss(){
-        dialog?.dismiss()
+    protected fun showToast(message : String){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -3,7 +3,6 @@ package com.mindorks.framework.mvvm.ui.main.login
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mindorks.framework.mvvm.data.api.ApiHelper
 import com.mindorks.framework.mvvm.data.model.DetailUserModel
 import com.mindorks.framework.mvvm.data.model.LoginBody
 import com.mindorks.framework.mvvm.data.repository.MainRepository
@@ -22,12 +21,15 @@ class LoginViewModel(private val mainRepository: MainRepository,
         viewModelScope.launch(IO){
             loginResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
-                mainRepository.login(loginBody).let {
-                    if (it.isSuccessful) {
-                        loginResponse.postValue(Resource.success(it.body()))
+                try {
+                    val response = mainRepository.login(loginBody)
+                    if (response.isSuccessful) {
+                        loginResponse.postValue(Resource.success(response.body()))
                     } else {
-                        loginResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                        loginResponse.postValue(Resource.error(response.errorBody().toString(), null))
                     }
+                }catch (e : Exception){
+                    loginResponse.postValue(Resource.error(e.message?:"", null))
                 }
             } else {
                 loginResponse.postValue(Resource.error("No internet connection", null))

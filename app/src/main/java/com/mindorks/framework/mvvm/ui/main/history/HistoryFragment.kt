@@ -39,14 +39,14 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
             it?.let { source ->
                 when(source.status){
                     Status.SUCCESS -> {
-                        getMainActivity()?.dismiss()
-//                        historyAdapter?.updateData(source.data?.data?: ArrayList())
+                        getMainActivity()?.showLoading(false)
+                        historyAdapter?.updateData(source.data?.data?: ArrayList())
                     }
                     Status.ERROR -> {
-                        getMainActivity()?.dismiss()
+                        getMainActivity()?.showLoading(false)
                     }
                     Status.LOADING -> {
-                        getMainActivity()?.showLoading()
+                        getMainActivity()?.showLoading(true)
                     }
                 }
             }

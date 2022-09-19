@@ -2,4 +2,5 @@
     <string name="app_name">Koin-Tutorial</string>
     <string name="txt_da_thue">Đã thuê</string>
     <string name="txt_con_trong">Còn trống</string>
+    <string name="txt_detail">Chi tiết pòng họp</string>
 </resources>

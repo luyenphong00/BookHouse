@@ -46,7 +46,9 @@ data class Result(
     @SerializedName("meeting_room_id") var meetId: Long?,
     @SerializedName("user_id") var userId: String?,
     @SerializedName("total_money") var totalMoney: String?,
-    @SerializedName("rental_services") var rentalServices: ArrayList<RentalServices>?
+    @SerializedName("rental_services") var rentalServices: ArrayList<RentalServices>?,
+    @SerializedName("name_meeting_room") var nameRoom: String?,
+    @SerializedName("path_img_meeting_room") var path: String?,
 )
 
 data class RentalServices(
