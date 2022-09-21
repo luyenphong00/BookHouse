@@ -42,8 +42,9 @@ class HistoryAdapter(var context: Context, private var onClick : (Result) -> Uni
         val item = lstHistory[position]
 
         with(binding){
+            tvName.text = item.nameRoom
             price.text = "${Utils.currencyFormat(item.totalMoney?:"")}đ"
-            val linkUrl = "http://192.168.0.108/DoAnDuongDucThang/public/" + item.path
+            val linkUrl = "http://192.168.0.109/DoAnDuongDucThang/public/" + item.path
             Glide.with(context)
                 .load(linkUrl)
                 .into(binding.image)
