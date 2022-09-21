@@ -16,6 +16,8 @@ class MainRepository (private val apiHelper: ApiService) {
 
     suspend fun login(loginBody: LoginBody) = apiHelper.login(loginBody)
 
+    suspend fun register(loginBody: LoginBody) = apiHelper.register(loginBody)
+
     suspend fun getDetailUser(id : String) = apiHelper.getUser(id)
 
     suspend fun fetChMeetingRoom() = apiHelper.meetingRooms()

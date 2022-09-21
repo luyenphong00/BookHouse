@@ -31,6 +31,9 @@ class InformationFragment : CommonFragment<FragmentInfomationBinding,BaseViewMod
             updateInfo.setOnClickListener {
                 findNavController().navigate(R.id.action_nav_information_to_nav_update_info)
             }
+            logout.setOnClickListener {
+                activity?.finish()
+            }
         }
     }
 }

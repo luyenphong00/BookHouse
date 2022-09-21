@@ -40,8 +40,8 @@ class UpdateInformationFragment : CommonFragment<FragmentUpdateInforBinding,Base
             binding.email.setText(it.email)
             binding.address.setText(it.addresses)
             binding.phone.setText(it.phone)
-            binding.nationality.text = it.nationality
-            binding.cardNo.text = it.id_card_no
+            binding.nationality.setText(it.nationality)
+            binding.cardNo.setText(it.id_card_no)
         }
     }
 

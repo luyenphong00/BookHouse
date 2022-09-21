@@ -36,4 +36,24 @@ class LoginViewModel(private val mainRepository: MainRepository,
             }
         }
     }
+
+    fun register(loginBody: LoginBody){
+        viewModelScope.launch(IO){
+            loginResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = mainRepository.register(loginBody)
+                    if (response.isSuccessful) {
+                        loginResponse.postValue(Resource.success(response.body()))
+                    } else {
+                        loginResponse.postValue(Resource.error(response.errorBody().toString(), null))
+                    }
+                }catch (e : Exception){
+                    loginResponse.postValue(Resource.error(e.message?:"", null))
+                }
+            } else {
+                loginResponse.postValue(Resource.error("No internet connection", null))
+            }
+        }
+    }
 }

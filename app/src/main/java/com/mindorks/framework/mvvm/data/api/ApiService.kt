@@ -14,6 +14,9 @@ interface ApiService {
     @POST("login")
     suspend fun login(@Body loginBody: LoginBody) : Response<DetailUserModel>
 
+    @POST("users")
+    suspend fun register(@Body loginBody: LoginBody) : Response<DetailUserModel>
+
     // http://127.0.0.1:8000/api/users
     @GET("users")
     suspend fun getListUser() : Response<ResponseUser>

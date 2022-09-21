@@ -23,7 +23,11 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
         super.initEvent()
         with(binding) {
             submit.setOnClickListener {
-                viewModel.login(LoginBody("Admin", "c"))
+                viewModel.login(LoginBody("Admin", "123456"))
+            }
+
+            register.setOnClickListener {
+                viewModel.register(LoginBody("TKTest", "123456"))
             }
         }
     }
