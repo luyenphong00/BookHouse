@@ -42,6 +42,7 @@ class DeviceAdapter(var context: Context, private var onClick : (EquipmentModel)
         with(binding){
             tvName.text = item.name
             price.text = Utils.currencyFormat(item.price.toString())
+            count.text = "${item.count}"
             if (item.select){
                 binding.add.setImageResource(R.drawable.ic_baseline_remove_circle_24)
             }else {
@@ -50,7 +51,23 @@ class DeviceAdapter(var context: Context, private var onClick : (EquipmentModel)
         }
 
         binding.add.setOnClickListener {
+            item.count++
+            binding.count.text = "${item.count}"
             onClick.invoke(item)
+        }
+
+        binding.remove.setOnClickListener {
+            if (item.count > 0){
+                item.count--
+                binding.count.text = "${item.count}"
+                return@setOnClickListener
+            }
+        }
+    }
+
+    fun getDataSelect() : List<EquipmentModel> {
+        return lstHistory.filter {
+            it.count > 0
         }
     }
 
@@ -58,8 +75,8 @@ class DeviceAdapter(var context: Context, private var onClick : (EquipmentModel)
         var total = 0L
         if (lstHistory.isNotEmpty()){
             lstHistory.forEach {
-                if (it.select){
-                    total += it.price?:0
+                if (it.count > 0){
+                    total += (it.price)?.times((it.count)) ?:0
                 }
             }
         }

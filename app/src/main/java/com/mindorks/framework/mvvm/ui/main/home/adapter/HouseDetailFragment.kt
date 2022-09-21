@@ -1,12 +1,13 @@
 package com.mindorks.framework.mvvm.ui.main.home.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonFragment
-import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
-import com.mindorks.framework.mvvm.data.model.EquipmentModel
-import com.mindorks.framework.mvvm.data.model.RoomData
+import com.mindorks.framework.mvvm.data.model.*
 import com.mindorks.framework.mvvm.databinding.FragmentHouseDetailBinding
 import com.mindorks.framework.mvvm.ui.main.adapter.DeviceAdapter
 import com.mindorks.framework.mvvm.ui.main.dialog.DialogCheckLink
@@ -17,12 +18,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewModel>() {
     override val viewModel: DetailModel by viewModel()
-    private var adapterAdd: DeviceAdapter? = null
-    private var adapterRemove: DeviceAdapter? = null
-    private var totalAll: Long = 0
-    private var lstEquipmentModel = ArrayList<EquipmentModel>()
+    private var adapterEquiment: DeviceAdapter? = null
+    private var adapterService: DeviceAdapter? = null
     private var lstEquỉmentRemove = ArrayList<EquipmentModel>()
-    private var meetTingRoom: RoomData? = null
+    private var response : DataResponseDepartment? = null
 
     override fun getViewBinding(): FragmentHouseDetailBinding =
         FragmentHouseDetailBinding.inflate(layoutInflater)
@@ -30,8 +29,37 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
     override fun initEvent() {
         super.initEvent()
         binding.submit.setOnClickListener {
-//            DialogCheckLink(requireContext(), adapter?.getTotalMoney().toString()).show()
+            val meetTingRoom = RoomBock(response?.id,"1,2,3",getDataRentalServices(),getDataRentalEquipment())
+            val totalMoney = (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
+                adapterEquiment?.getTotalMoney()?.toLong()
+                    ?.plus(it1)
+            }).toString()
+            Log.d("AAAAAAAAAAAAAA", (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
+                adapterEquiment?.getTotalMoney()?.toLong()
+                    ?.plus(it1)
+            }).toString())
+            DialogCheckLink(requireContext(), totalMoney) {
+                viewModel.rent(meetTingRoom)
+            }.show()
         }
+    }
+
+    fun getDataRentalServices(): ArrayList<RentalServicesRequest> {
+        val arrRental = ArrayList<RentalServicesRequest>()
+        adapterService?.getDataSelect()?.forEach {
+            arrRental.clear()
+            arrRental.add(RentalServicesRequest(it.id, it.count))
+        }
+        return arrRental
+    }
+
+    fun getDataRentalEquipment(): ArrayList<RentalEquipmentsRequest> {
+        val arrRental = ArrayList<RentalEquipmentsRequest>()
+        adapterEquiment?.getDataSelect()?.forEach {
+            arrRental.clear()
+            arrRental.add(RentalEquipmentsRequest(it.id, it.count))
+        }
+        return arrRental
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -45,30 +73,17 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                 Glide.with(requireContext())
                     .load(linkUrl)
                     .into(img)
-                meetTingRoom?.meetingRoomId = it.id
-                meetTingRoom?.userId = "1,2,4"
-//                meetTingRoom?.rentalServices = adapter.getTotalMoney()
+                response = it
             }
         }
 
-        adapterAdd = DeviceAdapter(requireContext()) {
-            it.select = true
-            lstEquipmentModel.remove(it)
-            adapterAdd?.updateData(lstEquipmentModel)
-            lstEquỉmentRemove.add(it)
-            adapterRemove?.updateData(lstEquỉmentRemove)
+        adapterEquiment = DeviceAdapter(requireContext()) {
         }
 
-        adapterRemove = DeviceAdapter(requireContext()) {
-            it.select = false
-            lstEquipmentModel.add(it)
-            adapterAdd?.updateData(lstEquipmentModel)
-            lstEquỉmentRemove.remove(it)
-            adapterRemove?.updateData(lstEquỉmentRemove)
+        adapterService = DeviceAdapter(requireContext()) {
         }
-        binding.rclEquidment.adapter = adapterAdd
-        binding.rclEquidmentRemove.adapter = adapterRemove
-        adapterRemove?.updateData(lstEquỉmentRemove)
+        binding.rclEquidment.adapter = adapterEquiment
+        binding.rclEquidmentRemove.adapter = adapterService
         viewModel.fetchEquipments()
 
     }
@@ -82,8 +97,7 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                         showLoading(false)
                         source.data?.let { equipmentRes ->
                             if (equipmentRes.data?.isNotEmpty() == true) {
-                                lstEquipmentModel.addAll(equipmentRes.data)
-                                adapterAdd?.updateData(lstEquipmentModel)
+                                adapterEquiment?.updateData(equipmentRes.data)
                                 viewModel.fetchService()
                             }
                         }
@@ -105,13 +119,30 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                         showLoading(false)
                         source.data?.let { equipmentRes ->
                             if (equipmentRes.data?.isNotEmpty() == true) {
-                                lstEquỉmentRemove.addAll(equipmentRes.data)
-                                adapterRemove?.updateData(lstEquipmentModel)
+                                adapterService?.updateData(equipmentRes.data)
                             }
                         }
                     }
                     Status.ERROR -> {
                         showLoading(false)
+                    }
+                    Status.LOADING -> {
+                        showLoading(true)
+                    }
+                }
+            }
+        }
+        viewModel.rentLiveData.observe(viewLifecycleOwner) {
+            it?.let { source ->
+                when (source.status) {
+                    Status.SUCCESS -> {
+                        showLoading(false)
+                        showMessage("Đặt phòng thành công")
+                        findNavController().popBackStack()
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
+                        showMessage("Đặt phòng thất bại")
                     }
                     Status.LOADING -> {
                         showLoading(true)

@@ -2,14 +2,13 @@ package com.mindorks.framework.mvvm.ui.main.viewmodel
 
 import androidx.lifecycle.*
 import com.mindorks.framework.mvvm.common.BaseViewModel
-import com.mindorks.framework.mvvm.data.model.EquipmentsResponse
-import com.mindorks.framework.mvvm.data.model.User
-import com.mindorks.framework.mvvm.data.model.UserModel
+import com.mindorks.framework.mvvm.data.model.*
 import com.mindorks.framework.mvvm.data.repository.MainRepository
 import com.mindorks.framework.mvvm.utils.NetworkHelper
 import com.mindorks.framework.mvvm.utils.Resource
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 
 class DetailModel(
     private val mainRepository: MainRepository,
@@ -18,6 +17,8 @@ class DetailModel(
 
     var lstEquipment = MutableLiveData<Resource<EquipmentsResponse>>()
     var lstService = MutableLiveData<Resource<EquipmentsResponse>>()
+    var rentLiveData = MutableLiveData<Resource<ResponseBody>>()
+
     fun fetchEquipments(){
         viewModelScope.launch(IO){
             lstEquipment.postValue(Resource.loading(null))
@@ -58,22 +59,22 @@ class DetailModel(
         }
     }
 
-    fun rentals(){
+    fun rent(roomBock: RoomBock){
         viewModelScope.launch(IO){
-            lstService.postValue(Resource.loading(null))
+            rentLiveData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    val response = mainRepository.services()
+                    val response = mainRepository.rent(roomBock)
                     if (response.isSuccessful) {
-                        lstService.postValue(Resource.success(response.body()))
+                        rentLiveData.postValue(Resource.success(null))
                     } else {
-                        lstService.postValue(Resource.error(response.errorBody().toString(), null))
+                        rentLiveData.postValue(Resource.error("", null))
                     }
                 }catch (e : Exception){
-                    lstService.postValue(Resource.error(e.message?:"", null))
+                    rentLiveData.postValue(Resource.error(e.message?:"", null))
                 }
             } else {
-                lstService.postValue(Resource.error("No internet connection", null))
+                rentLiveData.postValue(Resource.error("No internet connection", null))
             }
         }
     }

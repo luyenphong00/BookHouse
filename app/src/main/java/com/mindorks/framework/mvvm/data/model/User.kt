@@ -59,6 +59,8 @@ data class RentalServices(
     @SerializedName("created_at") var createdAt: String?,
 )
 
+
+
 data class LoginBody(
     @Json(name = "fullname") val fullname: String,
     @Json(name = "password") val password: String
@@ -99,9 +101,8 @@ data class EquipmentModel(
     @Json(name = "name") val name: String?,
     @Json(name = "price") val price: Long?,
     @Json(name = "number") val number: Long?,
-    var select : Boolean = false
-
-
+    var select: Boolean = false,
+    var count: Int = 0
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -121,6 +122,19 @@ data class EquipmentModel(
 
 // dat phong
 
-data class RoomData( @SerializedName("meeting_room_id") var meetingRoomId: Int?,
-                 @SerializedName("user_id") var userId: String?,
-                 @SerializedName("rental_services") var rentalServices: ArrayList<RentalServices>?)
+data class RoomBock(
+    @SerializedName("meeting_room_id") var meetingRoomId: Int?,
+    @SerializedName("user_id") var userId: String?,
+    @SerializedName("rental_services") var rentalServices: ArrayList<RentalServicesRequest>?,
+    @SerializedName("rental_equipments") var rentalEquipment: ArrayList<RentalEquipmentsRequest>?
+)
+
+data class RentalServicesRequest(
+    @SerializedName("service_id") var service_id: Int? = 0,
+    @SerializedName("quantity") var quantity: Int? = 0,
+)
+
+data class RentalEquipmentsRequest(
+    @SerializedName("equipment_id") var service_id: Int? = 0,
+    @SerializedName("quantity") var quantity: Int? = 0,
+)
