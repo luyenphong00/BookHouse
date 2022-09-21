@@ -99,4 +99,28 @@ data class EquipmentModel(
     @Json(name = "name") val name: String?,
     @Json(name = "price") val price: Long?,
     @Json(name = "number") val number: Long?,
-)
+    var select : Boolean = false
+
+
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as EquipmentModel
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id
+    }
+}
+
+// dat phong
+
+data class RoomData( @SerializedName("meeting_room_id") var meetingRoomId: Int?,
+                 @SerializedName("user_id") var userId: String?,
+                 @SerializedName("rental_services") var rentalServices: ArrayList<RentalServices>?)

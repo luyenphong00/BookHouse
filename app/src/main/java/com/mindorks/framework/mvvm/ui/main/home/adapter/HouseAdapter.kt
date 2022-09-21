@@ -39,7 +39,7 @@ class HouseAdapter(var context: Context, var type: Int, private var onClick: (Da
                     binding.status.setTextColor(ContextCompat.getColor(context,R.color.colorAccent))
                     binding.status.text = context.resources.getString(R.string.txt_con_trong)
                 }
-                val linkUrl = "http://192.168.0.108/DoAnDuongDucThang/public/" + item.image
+                val linkUrl = "http://10.29.230.242/DoAnDuongDucThang/public/" + item.image
                 Glide.with(context)
                     .load(linkUrl)
                     .into(binding.image)

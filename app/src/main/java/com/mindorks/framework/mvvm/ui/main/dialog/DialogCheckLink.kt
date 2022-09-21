@@ -12,7 +12,8 @@ import com.mindorks.framework.mvvm.R
 import com.mindorks.framework.mvvm.databinding.DialogChecklinkBinding
 
 class DialogCheckLink(
-    context: Context
+    context: Context,
+    var total : String
 ) : Dialog(context, R.style.MaterialDialogSheet) {
 
     private val binding = DialogChecklinkBinding.inflate(LayoutInflater.from(context))
@@ -27,6 +28,13 @@ class DialogCheckLink(
     }
 
     private fun initUI() {
+        binding.total.text = "Tổng tiền : ${total}"
+        binding.submit.setOnClickListener {
+            dismiss()
+        }
 
+        binding.cancel.setOnClickListener {
+            dismiss()
+        }
     }
 }

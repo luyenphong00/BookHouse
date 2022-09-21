@@ -26,6 +26,9 @@ interface ApiService {
     @POST("users")
     suspend fun updateUser(@Body userModel: UserModel) : Response<DetailUserModel>
 
+    @POST("rentals")
+    suspend fun rentals(@Body userModel: UserModel) : Response<DetailUserModel>
+
     // http://127.0.0.1:8000/api/departments
     @GET("departments")
     suspend fun getDepartments() : Response<DepartmentsModel>

@@ -17,6 +17,7 @@ class DetailModel(
 ) : BaseViewModel() {
 
     var lstEquipment = MutableLiveData<Resource<EquipmentsResponse>>()
+    var lstService = MutableLiveData<Resource<EquipmentsResponse>>()
     fun fetchEquipments(){
         viewModelScope.launch(IO){
             lstEquipment.postValue(Resource.loading(null))
@@ -33,6 +34,46 @@ class DetailModel(
                 }
             } else {
                 lstEquipment.postValue(Resource.error("No internet connection", null))
+            }
+        }
+    }
+
+    fun fetchService(){
+        viewModelScope.launch(IO){
+            lstService.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = mainRepository.services()
+                    if (response.isSuccessful) {
+                        lstService.postValue(Resource.success(response.body()))
+                    } else {
+                        lstService.postValue(Resource.error(response.errorBody().toString(), null))
+                    }
+                }catch (e : Exception){
+                    lstService.postValue(Resource.error(e.message?:"", null))
+                }
+            } else {
+                lstService.postValue(Resource.error("No internet connection", null))
+            }
+        }
+    }
+
+    fun rentals(){
+        viewModelScope.launch(IO){
+            lstService.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = mainRepository.services()
+                    if (response.isSuccessful) {
+                        lstService.postValue(Resource.success(response.body()))
+                    } else {
+                        lstService.postValue(Resource.error(response.errorBody().toString(), null))
+                    }
+                }catch (e : Exception){
+                    lstService.postValue(Resource.error(e.message?:"", null))
+                }
+            } else {
+                lstService.postValue(Resource.error("No internet connection", null))
             }
         }
     }
