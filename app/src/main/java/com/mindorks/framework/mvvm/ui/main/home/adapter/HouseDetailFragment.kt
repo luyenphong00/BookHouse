@@ -105,8 +105,8 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                         showLoading(false)
                         source.data?.let { equipmentRes ->
                             if (equipmentRes.data?.isNotEmpty() == true) {
-                                lstEquipmentModel.addAll(equipmentRes.data)
-                                adapterAdd?.updateData(lstEquipmentModel)
+                                lstEquỉmentRemove.addAll(equipmentRes.data)
+                                adapterRemove?.updateData(lstEquipmentModel)
                             }
                         }
                     }

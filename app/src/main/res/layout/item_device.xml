@@ -14,33 +14,45 @@
         android:padding="10dp"
         android:text="Test sản phẩm 1"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toStartOf="@id/add"
+        app:layout_constraintEnd_toStartOf="@id/remove"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <androidx.appcompat.widget.AppCompatImageView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        app:srcCompat="@drawable/ic_baseline_remove_circle_24"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/add"
+        app:layout_constraintEnd_toStartOf="@id/count"
+        app:layout_constraintTop_toTopOf="@id/add"
+        app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
 
-<!--    <androidx.appcompat.widget.AppCompatTextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/add"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="0"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/add"
+        app:layout_constraintEnd_toStartOf="@+id/add"
+        app:layout_constraintTop_toTopOf="@id/add" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/add"
         android:layout_width="wrap_content"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/price"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/remove"
         android:layout_height="wrap_content"
         android:paddingHorizontal="10dp"
         android:text="100000d"
