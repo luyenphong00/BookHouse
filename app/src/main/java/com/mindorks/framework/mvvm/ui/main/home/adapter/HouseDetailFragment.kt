@@ -10,6 +10,7 @@ import com.mindorks.framework.mvvm.common.CommonFragment
 import com.mindorks.framework.mvvm.data.model.*
 import com.mindorks.framework.mvvm.databinding.FragmentHouseDetailBinding
 import com.mindorks.framework.mvvm.ui.main.adapter.DeviceAdapter
+import com.mindorks.framework.mvvm.ui.main.adapter.UserAdapter
 import com.mindorks.framework.mvvm.ui.main.dialog.DialogCheckLink
 import com.mindorks.framework.mvvm.ui.main.viewmodel.DetailModel
 import com.mindorks.framework.mvvm.utils.Status
@@ -20,6 +21,7 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
     override val viewModel: DetailModel by viewModel()
     private var adapterEquiment: DeviceAdapter? = null
     private var adapterService: DeviceAdapter? = null
+    private var adapterUser : UserAdapter? = null
     private var lstEquỉmentRemove = ArrayList<EquipmentModel>()
     private var response : DataResponseDepartment? = null
 
@@ -80,11 +82,16 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
         adapterEquiment = DeviceAdapter(requireContext()) {
         }
 
+        adapterUser = UserAdapter(requireContext()) {
+
+        }
+
         adapterService = DeviceAdapter(requireContext()) {
         }
-        binding.rclEquidment.adapter = adapterEquiment
-        binding.rclEquidmentRemove.adapter = adapterService
+        binding.rclEqui.adapter = adapterEquiment
+        binding.rclService.adapter = adapterService
         viewModel.fetchEquipments()
+        viewModel.getLstUser()
 
     }
 
@@ -143,6 +150,26 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                     Status.ERROR -> {
                         showLoading(false)
                         showMessage("Đặt phòng thất bại")
+                    }
+                    Status.LOADING -> {
+                        showLoading(true)
+                    }
+                }
+            }
+        }
+
+        viewModel.lstUser.observe(viewLifecycleOwner) { it ->
+            it?.let { source ->
+                when (source.status) {
+                    Status.SUCCESS -> {
+                       source.data?.let { response ->
+                           response.let {
+                               it.lstUser?.let { it1 -> adapterUser?.updateData(it1) }
+                           }
+                       }
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
                     }
                     Status.LOADING -> {
                         showLoading(true)

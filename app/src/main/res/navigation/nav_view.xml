@@ -55,6 +55,6 @@
         android:id="@+id/nav_update_info"
         android:name="com.mindorks.framework.mvvm.ui.main.information.UpdateInformationFragment"
         android:label="label_detail"
-        tools:layout="@layout/fragment_information_detail_new" />
+      />
 
 </navigation>

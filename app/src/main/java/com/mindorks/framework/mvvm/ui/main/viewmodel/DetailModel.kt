@@ -17,6 +17,7 @@ class DetailModel(
 
     var lstEquipment = MutableLiveData<Resource<EquipmentsResponse>>()
     var lstService = MutableLiveData<Resource<EquipmentsResponse>>()
+    var lstUser = MutableLiveData<Resource<ResponseUser>>()
     var rentLiveData = MutableLiveData<Resource<ResponseBody>>()
 
     fun fetchEquipments(){
@@ -75,6 +76,26 @@ class DetailModel(
                 }
             } else {
                 rentLiveData.postValue(Resource.error("No internet connection", null))
+            }
+        }
+    }
+
+    fun getLstUser(){
+        viewModelScope.launch(IO){
+            rentLiveData.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = mainRepository.getListUser()
+                    if (response.isSuccessful) {
+                        lstUser.postValue(Resource.success(response.body()))
+                    } else {
+                        lstUser.postValue(Resource.error("", null))
+                    }
+                }catch (e : Exception){
+                    lstUser.postValue(Resource.error(e.message?:"", null))
+                }
+            } else {
+                lstUser.postValue(Resource.error("No internet connection", null))
             }
         }
     }

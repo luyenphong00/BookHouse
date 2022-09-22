@@ -89,6 +89,7 @@ data class UserModel(
     @SerializedName("ethnicity") var ethnicity: String?,
     @SerializedName("domicile") var domicile: String?,
     @SerializedName("admin") var admin: Int?,
+    var select : Boolean? = false
 ) : Parcelable
 
 data class EquipmentsResponse(@Json(name = "data") val data: ArrayList<EquipmentModel>?) :

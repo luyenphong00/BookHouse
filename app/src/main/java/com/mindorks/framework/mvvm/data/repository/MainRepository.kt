@@ -12,6 +12,7 @@ class MainRepository (private val apiHelper: ApiService) {
     suspend fun getListUser() = apiHelper.getListUser()
 
     suspend fun updateUser(userModel: UserModel) = apiHelper.updateUser(userModel)
+    
     suspend fun rent(room: RoomBock) = apiHelper.rent(room)
 
     suspend fun login(loginBody: LoginBody) = apiHelper.login(loginBody)
