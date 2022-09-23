@@ -61,6 +61,9 @@ interface ApiService {
     @GET("rentals")
     suspend fun getRentals(@Query("meeting_room_id") id : Int) : Response<DepartmentsModel>
 
+    @DELETE("rentals")
+    suspend fun deleteRentals(@Query("id") id : Int) : Response<BaseModel>
+
     // http://127.0.0.1:8000/api/rentals_get_metting_room_of_user?user_id=1
     @GET("rentals_get_metting_room_of_user")
     suspend fun  rentalsGetMettingRoom(@Query("user_id") id : Int) : Response<EntalsGetMettingModel>

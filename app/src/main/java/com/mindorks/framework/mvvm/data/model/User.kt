@@ -66,7 +66,7 @@ data class LoginBody(
 )
 
 data class ResponseUser(
-    @Json(name = "data") val lstUser: ArrayList<UserModel>?
+    @SerializedName("data") val lstUser: ArrayList<UserModel>?
 ) : BaseModel()
 
 data class DetailUserModel(@SerializedName("data") val data: UserModel?) : BaseModel()
@@ -89,6 +89,7 @@ data class UserModel(
     @SerializedName("ethnicity") var ethnicity: String?,
     @SerializedName("domicile") var domicile: String?,
     @SerializedName("admin") var admin: Int?,
+    var select : Boolean? = false
 ) : Parcelable
 
 data class EquipmentsResponse(@Json(name = "data") val data: ArrayList<EquipmentModel>?) :

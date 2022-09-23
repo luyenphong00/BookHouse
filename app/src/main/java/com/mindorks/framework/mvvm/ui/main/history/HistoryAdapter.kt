@@ -13,7 +13,11 @@ import com.mindorks.framework.mvvm.databinding.ItemHouseNewBinding
 import com.mindorks.framework.mvvm.utils.Utils
 import kotlinx.android.synthetic.main.item_layout.view.*
 
-class HistoryAdapter(var context: Context, private var onClick : (Result) -> Unit) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter(
+    var context: Context,
+    private var onClick: (Result) -> Unit,
+    private var delete: (Result) -> Unit
+) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     private var lstHistory = mutableListOf<Result>()
 
@@ -22,7 +26,7 @@ class HistoryAdapter(var context: Context, private var onClick : (Result) -> Uni
 
     fun updateData(list: ArrayList<Result>) {
         lstHistory.clear()
-        if (list.isNotEmpty()){
+        if (list.isNotEmpty()) {
             lstHistory.addAll(list)
         }
         notifyDataSetChanged()
@@ -41,16 +45,32 @@ class HistoryAdapter(var context: Context, private var onClick : (Result) -> Uni
         val binding = holder.binding
         val item = lstHistory[position]
 
-        with(binding){
+        with(binding) {
             tvName.text = item.nameRoom
-            price.text = "${Utils.currencyFormat(item.totalMoney?:"")}đ"
+            price.text = "${Utils.currencyFormat(item.totalMoney ?: "")}đ"
             val linkUrl = "http://192.168.0.109/DoAnDuongDucThang/public/" + item.path
             Glide.with(context)
                 .load(linkUrl)
                 .into(binding.image)
+
+            ivDelete.setOnClickListener {
+                delete.invoke(item)
+            }
         }
         binding.root.setOnClickListener {
             onClick.invoke(item)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeData(result: Result){
+        if (lstHistory.isNotEmpty()){
+            lstHistory.forEach {
+                if (it.id == result.id){
+                    lstHistory.remove(result)
+                }
+            }
+            notifyDataSetChanged()
         }
     }
 }

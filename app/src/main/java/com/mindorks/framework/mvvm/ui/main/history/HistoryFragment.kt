@@ -2,6 +2,7 @@ package com.mindorks.framework.mvvm.ui.main.history
 
 import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonFragment
+import com.mindorks.framework.mvvm.data.model.Result
 import com.mindorks.framework.mvvm.databinding.FragmentHistoryBinding
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import com.mindorks.framework.mvvm.utils.Status
@@ -12,8 +13,8 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
 
     private var historyAdapter: HistoryAdapter? = null
     override val viewModel: HistoryViewModel by viewModel()
-    private var lstFake = mutableListOf<String>()
     private val sharedViewModel by sharedViewModel<MainViewModel>()
+    private var dataDelete : Result? = null
 
     override fun getViewBinding(): FragmentHistoryBinding =
         FragmentHistoryBinding.inflate(layoutInflater)
@@ -23,9 +24,12 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
         sharedViewModel.userModel?.let {
             it.id?.let { it1 -> viewModel.getRentalsToMettingRoom(it1) }
         }
-        historyAdapter = HistoryAdapter(requireContext()) {
+        historyAdapter = HistoryAdapter(requireContext(),{
 
-        }
+        },{
+            dataDelete = it
+            viewModel.deleteRentals(it.id?.toInt() ?: 0)
+        })
         binding.rclHistory.adapter = historyAdapter
     }
 
@@ -43,7 +47,28 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
                         historyAdapter?.updateData(source.data?.data?: ArrayList())
                     }
                     Status.ERROR -> {
+                        showMessage(source.message?:"")
                         getMainActivity()?.showLoading(false)
+                    }
+                    Status.LOADING -> {
+                        getMainActivity()?.showLoading(true)
+                    }
+                }
+            }
+        }
+
+        viewModel.deleteResponse.observe(viewLifecycleOwner) {
+            it?.let { source ->
+                when(source.status){
+                    Status.SUCCESS -> {
+                        getMainActivity()?.showLoading(false)
+                        dataDelete?.let {
+                                it1 -> historyAdapter?.removeData(it1)
+                        }
+                    }
+                    Status.ERROR -> {
+                        getMainActivity()?.showLoading(false)
+                        showMessage(source.message?:"")
                     }
                     Status.LOADING -> {
                         getMainActivity()?.showLoading(true)

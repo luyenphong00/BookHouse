@@ -10,17 +10,19 @@ import com.mindorks.framework.mvvm.common.CommonFragment
 import com.mindorks.framework.mvvm.data.model.*
 import com.mindorks.framework.mvvm.databinding.FragmentHouseDetailBinding
 import com.mindorks.framework.mvvm.ui.main.adapter.DeviceAdapter
+import com.mindorks.framework.mvvm.ui.main.adapter.UserAdapter
 import com.mindorks.framework.mvvm.ui.main.dialog.DialogCheckLink
 import com.mindorks.framework.mvvm.ui.main.viewmodel.DetailModel
 import com.mindorks.framework.mvvm.utils.Status
 import com.mindorks.framework.mvvm.utils.Utils.currencyFormat
+import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewModel>() {
     override val viewModel: DetailModel by viewModel()
     private var adapterEquiment: DeviceAdapter? = null
     private var adapterService: DeviceAdapter? = null
-    private var lstEquỉmentRemove = ArrayList<EquipmentModel>()
+    private var adapterUser : UserAdapter? = null
     private var response : DataResponseDepartment? = null
 
     override fun getViewBinding(): FragmentHouseDetailBinding =
@@ -29,7 +31,7 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
     override fun initEvent() {
         super.initEvent()
         binding.submit.setOnClickListener {
-            val meetTingRoom = RoomBock(response?.id,"1,2,3",getDataRentalServices(),getDataRentalEquipment())
+            val meetTingRoom = RoomBock(response?.id,adapterUser?.getLstUser().toString(),getDataRentalServices(),getDataRentalEquipment())
             val totalMoney = (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
                 adapterEquiment?.getTotalMoney()?.toLong()
                     ?.plus(it1)
@@ -82,10 +84,18 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
 
         adapterService = DeviceAdapter(requireContext()) {
         }
+
+        adapterUser = UserAdapter(requireContext()) {
+
+        }
+
+        binding.recycleViewUser.adapter = adapterUser
+
         binding.rclEquidment.adapter = adapterEquiment
         binding.rclEquidmentRemove.adapter = adapterService
         viewModel.fetchEquipments()
-
+        viewModel.getListUser()
+        viewModel.fetchService()
     }
 
     override fun initObserver() {
@@ -98,7 +108,6 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                         source.data?.let { equipmentRes ->
                             if (equipmentRes.data?.isNotEmpty() == true) {
                                 adapterEquiment?.updateData(equipmentRes.data)
-                                viewModel.fetchService()
                             }
                         }
                     }
@@ -149,6 +158,28 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                     }
                 }
             }
+        }
+
+        viewModel.lstUserLiveData.observe(viewLifecycleOwner) {
+            it?.let { source ->
+                when(source.status){
+                    Status.SUCCESS -> {
+                        showLoading(false)
+                        source.data?.let { response ->
+                            if (response.lstUser?.isNotEmpty() == true){
+                                adapterUser?.updateData(response.lstUser)
+                            }
+                        }
+                    }
+                    Status.ERROR -> {
+                        showLoading(false)
+                    }
+                    Status.LOADING -> {
+                        showLoading(true)
+                    }
+                }
+            }
+
         }
     }
 }
