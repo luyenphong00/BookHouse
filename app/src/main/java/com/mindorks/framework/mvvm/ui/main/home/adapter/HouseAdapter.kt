@@ -12,6 +12,7 @@ import com.mindorks.framework.mvvm.R
 import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
 import com.mindorks.framework.mvvm.databinding.ItemHouseBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseNewBinding
+import com.mindorks.framework.mvvm.utils.Utils.URL_IMAGE
 import com.mindorks.framework.mvvm.utils.Utils.currencyFormat
 
 class HouseAdapter(var context: Context, var type: Int, private var onClick: (DataResponseDepartment) -> Unit) :
@@ -39,7 +40,7 @@ class HouseAdapter(var context: Context, var type: Int, private var onClick: (Da
                     binding.status.setTextColor(ContextCompat.getColor(context,R.color.colorAccent))
                     binding.status.text = context.resources.getString(R.string.txt_con_trong)
                 }
-                val linkUrl = "http://10.29.230.242/DoAnDuongDucThang/public/" + item.image
+                val linkUrl = URL_IMAGE + item.image
                 Glide.with(context)
                     .load(linkUrl)
                     .into(binding.image)

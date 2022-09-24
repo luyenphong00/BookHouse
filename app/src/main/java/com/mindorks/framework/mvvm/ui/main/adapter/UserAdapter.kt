@@ -17,11 +17,24 @@ class UserAdapter(var context: Context, private var onClick : (UserModel) -> Uni
     inner class ViewHolder(var binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    private var userModel: UserModel? = null
+
     @SuppressLint("NotifyDataSetChanged")
     fun updateData(list: ArrayList<UserModel>) {
         lstHistory.clear()
         if (list.isNotEmpty()){
             lstHistory.addAll(list)
+        }
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun update(userModel: UserModel){
+        this.userModel = userModel
+        lstHistory.forEach {
+            if (it.id == userModel.id){
+                it.select = true
+            }
         }
         notifyDataSetChanged()
     }
@@ -48,8 +61,10 @@ class UserAdapter(var context: Context, private var onClick : (UserModel) -> Uni
         with(binding){
             tvName.text = item.fullname
             add.setOnClickListener {
-                item.select = item.select != true
-                notifyItemChanged(position)
+                if (item.id != userModel?.id){
+                    item.select = item.select != true
+                    notifyItemChanged(position)
+                }
             }
         }
     }

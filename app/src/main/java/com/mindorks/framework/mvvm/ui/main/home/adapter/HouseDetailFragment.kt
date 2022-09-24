@@ -13,9 +13,11 @@ import com.mindorks.framework.mvvm.ui.main.adapter.DeviceAdapter
 import com.mindorks.framework.mvvm.ui.main.adapter.UserAdapter
 import com.mindorks.framework.mvvm.ui.main.dialog.DialogCheckLink
 import com.mindorks.framework.mvvm.ui.main.viewmodel.DetailModel
+import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import com.mindorks.framework.mvvm.utils.Status
 import com.mindorks.framework.mvvm.utils.Utils.currencyFormat
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewModel>() {
@@ -24,6 +26,7 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
     private var adapterService: DeviceAdapter? = null
     private var adapterUser : UserAdapter? = null
     private var response : DataResponseDepartment? = null
+    private val sharedViewModel by sharedViewModel<MainViewModel>()
 
     override fun getViewBinding(): FragmentHouseDetailBinding =
         FragmentHouseDetailBinding.inflate(layoutInflater)
@@ -68,6 +71,7 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
     override fun initData() {
         super.initData()
         with(binding) {
+
             arguments?.getParcelable<DataResponseDepartment>("obj")?.let {
                 tvName.text = it.name
                 price.text = "Giá: ${currencyFormat(it.price ?: "")} đ/giờ"
@@ -168,6 +172,7 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
                         source.data?.let { response ->
                             if (response.lstUser?.isNotEmpty() == true){
                                 adapterUser?.updateData(response.lstUser)
+                                sharedViewModel.userModel?.let { it1 -> adapterUser?.update(it1) }
                             }
                         }
                     }

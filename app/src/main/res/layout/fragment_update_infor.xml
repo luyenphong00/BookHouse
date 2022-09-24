@@ -39,6 +39,12 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên đăng nhập"
+                android:textColor="@android:color/black" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
@@ -52,11 +58,17 @@
                 android:textSize="12sp"
                 tools:targetApi="lollipop" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Địa chỉ email"
+                android:textColor="@android:color/black" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/ic_frame_36569"
                 android:backgroundTint="#E3E5E7"
                 android:hint="Địa chỉ email"
@@ -66,11 +78,17 @@
                 android:textSize="12sp"
                 tools:targetApi="lollipop" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Số điện thoại"
+                android:textColor="@android:color/black" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/ic_frame_36569"
                 android:backgroundTint="#E3E5E7"
                 android:hint="Số điện thoại"
@@ -79,11 +97,17 @@
                 android:textColorHint="#A8A8A8"
                 android:textSize="12sp" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Địa chỉ"
+                android:textColor="@android:color/black" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/ic_frame_36569"
                 android:backgroundTint="#E3E5E7"
                 android:hint="Địa chỉ"
@@ -94,25 +118,37 @@
                 tools:targetApi="lollipop" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Quốc tịch"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/nationality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/ic_frame_36569"
                 android:backgroundTint="#E3E5E7"
                 android:gravity="center_vertical"
                 android:hint="Quoc gia"
-                android:text="Việt Nam"
                 android:padding="10dp"
+                android:text="Việt Nam"
                 android:textColor="@android:color/black"
                 android:textColorHint="#A8A8A8"
                 android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Mã số thẻ"
+                android:textColor="@android:color/black" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/card_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/ic_frame_36569"
                 android:backgroundTint="#E3E5E7"
                 android:gravity="center_vertical"

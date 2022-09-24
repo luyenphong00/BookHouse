@@ -11,6 +11,7 @@ import com.mindorks.framework.mvvm.databinding.ItemHouseActiveBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseNewBinding
 import com.mindorks.framework.mvvm.utils.Utils
+import com.mindorks.framework.mvvm.utils.Utils.URL_IMAGE
 import kotlinx.android.synthetic.main.item_layout.view.*
 
 class HistoryAdapter(
@@ -48,7 +49,7 @@ class HistoryAdapter(
         with(binding) {
             tvName.text = item.nameRoom
             price.text = "${Utils.currencyFormat(item.totalMoney ?: "")}đ"
-            val linkUrl = "http://192.168.0.109/DoAnDuongDucThang/public/" + item.path
+            val linkUrl = URL_IMAGE + item.path
             Glide.with(context)
                 .load(linkUrl)
                 .into(binding.image)
