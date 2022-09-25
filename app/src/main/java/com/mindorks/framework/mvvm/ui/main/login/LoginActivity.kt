@@ -8,6 +8,7 @@ import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonActivity
 import com.mindorks.framework.mvvm.data.model.LoginBody
 import com.mindorks.framework.mvvm.databinding.FragmentLoginBinding
+import com.mindorks.framework.mvvm.ui.main.view.MainActivity
 import com.mindorks.framework.mvvm.ui.main.view.MainNewActivity
 import com.mindorks.framework.mvvm.utils.Status
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -77,4 +77,9 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
             }
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        showLoading(false)
+    }
 }

@@ -49,13 +49,41 @@
         app:layout_constraintTop_toBottomOf="@+id/image" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/manager_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Quản lý thiết bị"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/ic_baseline_store_mall_directory_24"
+        app:layout_constraintTop_toBottomOf="@+id/update_info" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/manager_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="Quản lý dịch vụ"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/ic_baseline_home_repair_service_24"
+        app:layout_constraintTop_toBottomOf="@+id/manager_device" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:padding="10dp"
         android:layout_marginBottom="30dp"
         android:gravity="center"
+        android:padding="10dp"
         android:text="Đăng xuất"
         android:textColor="@android:color/black"
         android:textStyle="bold"

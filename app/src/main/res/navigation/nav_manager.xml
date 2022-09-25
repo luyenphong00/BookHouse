@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_view"
+    app:startDestination="@id/nav_account"
+    tools:ignore="InvalidNavigation">
+
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.mindorks.framework.mvvm.ui.main.manager.AccountFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_account">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_metting"
+        android:name="com.mindorks.framework.mvvm.ui.main.manager.metting.MettingFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_metting">
+
+        <action
+            android:id="@+id/action_nav_detail"
+            app:destination="@id/nav_detail" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_home"
+        app:destination="@id/nav_home" />
+
+    <action
+        android:id="@+id/action_history"
+        app:destination="@id/nav_history" />
+
+    <action
+        android:id="@+id/action_information"
+        app:destination="@id/nav_information" />
+
+    <fragment
+        android:id="@+id/nav_information"
+        android:name="com.mindorks.framework.mvvm.ui.main.information.InformationFragment"
+        android:label="label_information"
+        tools:layout="@layout/fragment_infomation">
+        <action
+            android:id="@+id/action_nav_information_to_nav_update_info"
+            app:destination="@id/nav_update_info" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_detail"
+        android:name="com.mindorks.framework.mvvm.ui.main.home.adapter.HouseDetailFragment"
+        android:label="label_detail"
+        tools:layout="@layout/fragment_house_detail" />
+
+    <fragment
+        android:id="@+id/nav_update_info"
+        android:name="com.mindorks.framework.mvvm.ui.main.information.UpdateInformationFragment"
+        android:label="label_detail"
+        tools:layout="@layout/fragment_update_infor" />
+
+</navigation>

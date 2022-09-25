@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import com.mindorks.framework.mvvm.R
 import com.mindorks.framework.mvvm.databinding.DialogChecklinkBinding
+import com.mindorks.framework.mvvm.utils.Utils.currencyFormat
 
 class DialogCheckLink(
     context: Context,
@@ -29,7 +30,7 @@ class DialogCheckLink(
     }
 
     private fun initUI() {
-        binding.total.text = "Tổng tiền : ${total}"
+        binding.total.text = "Tổng tiền : ${currencyFormat(total)}"
         binding.submit.setOnClickListener {
             submit.invoke()
             dismiss()

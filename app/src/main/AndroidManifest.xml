@@ -24,6 +24,7 @@
         </activity>
 
         <activity android:name=".ui.main.view.MainNewActivity"/>
+        <activity android:name=".ui.main.view.MainActivity"/>
     </application>
 
 </manifest>

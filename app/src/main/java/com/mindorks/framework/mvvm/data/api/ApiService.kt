@@ -57,6 +57,9 @@ interface ApiService {
     @GET("meeting-rooms")
     suspend fun meetingRooms() : Response<DepartmentsModel>
 
+    @DELETE("meeting-rooms")
+    suspend fun deleteMeetingRooms() : Response<DepartmentsModel>
+
     // http://127.0.0.1:8000/api/rentals?meeting_room_id=1
     @GET("rentals")
     suspend fun getRentals(@Query("meeting_room_id") id : Int) : Response<DepartmentsModel>

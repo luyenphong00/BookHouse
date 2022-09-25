@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import com.mindorks.framework.mvvm.ui.main.view.MainActivity
 import com.mindorks.framework.mvvm.ui.main.view.MainNewActivity
 
 abstract class CommonFragment<VB : ViewBinding,VM : BaseViewModel> : Fragment(), IScreen {
@@ -50,8 +51,18 @@ abstract class CommonFragment<VB : ViewBinding,VM : BaseViewModel> : Fragment(),
         } else null
     }
 
+    protected open fun mainActivity(): MainActivity? {
+        return if (activity is MainActivity) {
+            activity as MainActivity?
+        } else null
+    }
+
     fun showLoading(boolean: Boolean){
         getMainActivity()?.showLoading(boolean)
+    }
+
+    fun loading(boolean: Boolean){
+        mainActivity()?.showLoading(boolean)
     }
 
     fun showMessage(message : String){
