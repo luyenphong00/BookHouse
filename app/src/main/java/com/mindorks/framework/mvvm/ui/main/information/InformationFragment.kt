@@ -35,6 +35,9 @@ class InformationFragment : CommonFragment<FragmentInfomationBinding, BaseViewMo
         if (userModel.admin == 1){
             binding.managerDevice.visibility = View.VISIBLE
             binding.managerService.visibility = View.VISIBLE
+        }else {
+            binding.managerDevice.visibility = View.GONE
+            binding.managerService.visibility = View.GONE
         }
     }
 

@@ -57,8 +57,11 @@ interface ApiService {
     @GET("meeting-rooms")
     suspend fun meetingRooms() : Response<DepartmentsModel>
 
-    @DELETE("meeting-rooms")
-    suspend fun deleteMeetingRooms() : Response<DepartmentsModel>
+    @HTTP(method = "DELETE", path = "meeting-rooms", hasBody = true)
+    suspend fun deleteMeetingRooms(@Body body: DataResponseDepartment) : Response<BaseModel>
+
+    @POST("meeting-rooms")
+    suspend fun updateMeetingRooms(@Body body: DataResponseDepartment) : Response<BaseModel>
 
     // http://127.0.0.1:8000/api/rentals?meeting_room_id=1
     @GET("rentals")

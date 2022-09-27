@@ -50,9 +50,9 @@
 
     <fragment
         android:id="@+id/nav_detail"
-        android:name="com.mindorks.framework.mvvm.ui.main.home.adapter.HouseDetailFragment"
+        android:name="com.mindorks.framework.mvvm.ui.main.manager.metting.DetailMetting"
         android:label="label_detail"
-        tools:layout="@layout/fragment_house_detail" />
+        tools:layout="@layout/fragment_house_detail_manager" />
 
     <fragment
         android:id="@+id/nav_update_info"

@@ -24,11 +24,23 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
         super.initEvent()
         with(binding) {
             submit.setOnClickListener {
-                viewModel.login(LoginBody("Admin", "123456"))
+                if (binding.fullname.text.toString().isNotEmpty()
+                    && binding.pass.text.toString().isNotEmpty()) {
+                    viewModel.login(LoginBody(binding.fullname.text.toString(),
+                        binding.pass.text.toString()))
+                }else {
+                    showToast("Nhập đủ thông tin!")
+                }
             }
 
             register.setOnClickListener {
-                viewModel.register(LoginBody("TKTest", "123456"))
+                if (binding.fullname.text.toString().isNotEmpty()
+                    && binding.pass.text.toString().isNotEmpty()) {
+                    viewModel.register(LoginBody(binding.fullname.text.toString(),
+                        binding.pass.text.toString()))
+                }else {
+                    showToast("Nhập đủ thông tin!")
+                }
             }
         }
     }
@@ -40,12 +52,25 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         showLoading(false)
-                        val intent = Intent(this@LoginActivity,MainNewActivity::class.java)
-                        val bundler = Bundle()
-                        bundler.putParcelable("param",resource.data?.data)
-                        intent.putExtras(bundler)
-                        startActivity(intent)
-                        finish()
+                        resource.data?.let {
+                            val bundler = Bundle()
+                            it.data?.let { userModel ->
+                                var intent: Intent? = null
+                                if (userModel.admin == 0) {
+                                    intent = Intent(this@LoginActivity, MainNewActivity::class.java)
+                                } else if (userModel.admin == 1) {
+                                    intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                }
+                                bundler.putParcelable("param", resource.data.data)
+                                intent?.putExtras(bundler)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                        } ?: kotlin.run {
+                            showToast(resource.message.toString())
+                        }
+
                     }
                     Status.ERROR -> {
                         showLoading(false)
@@ -59,7 +84,7 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
         }
     }
 
-    fun showLoading(boolean: Boolean){
+    fun showLoading(boolean: Boolean) {
         binding.loading.isVisible = boolean
     }
 }

@@ -4,6 +4,7 @@ import com.mindorks.framework.mvvm.ui.main.history.HistoryViewModel
 import com.mindorks.framework.mvvm.ui.main.home.HomeViewModel
 import com.mindorks.framework.mvvm.ui.main.information.InformationViewModel
 import com.mindorks.framework.mvvm.ui.main.login.LoginViewModel
+import com.mindorks.framework.mvvm.ui.main.manager.ManagerViewModel
 import com.mindorks.framework.mvvm.ui.main.viewmodel.DetailModel
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -16,6 +17,9 @@ val viewModelModule = module {
 
     viewModel {
         DetailModel(get(),get())
+    }
+    viewModel {
+        ManagerViewModel(get(),get())
     }
     viewModel {
         LoginViewModel(get(),get())

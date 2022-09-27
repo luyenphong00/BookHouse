@@ -29,11 +29,11 @@ data class DepartmentsModel(
 @Parcelize
 data class DataResponseDepartment(
     @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String?,
-    @SerializedName("telephone") val telephone: String?,
-    @SerializedName("description") val description: String?,
-    @SerializedName("status") val status: Int?,
-    @SerializedName("price") val price: String?,
+    @SerializedName("name") var name: String?,
+    @SerializedName("telephone") var telephone: String?,
+    @SerializedName("description") var description: String?,
+    @SerializedName("status") var status: Int?,
+    @SerializedName("price") var price: String?,
     @SerializedName("path_img") val image: String?,
     var active: Boolean?
 ) : Parcelable
@@ -61,7 +61,7 @@ data class RentalServices(
 
 
 data class LoginBody(
-    @Json(name = "fullname") val fullname: String,
+    @Json(name = "email") val email: String,
     @Json(name = "password") val password: String
 )
 

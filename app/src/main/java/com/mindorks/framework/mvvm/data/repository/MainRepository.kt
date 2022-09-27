@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvvm.data.repository
 
 import com.mindorks.framework.mvvm.data.api.ApiService
+import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
 import com.mindorks.framework.mvvm.data.model.LoginBody
 import com.mindorks.framework.mvvm.data.model.RoomBock
 import com.mindorks.framework.mvvm.data.model.UserModel
@@ -31,5 +32,9 @@ class MainRepository (private val apiHelper: ApiService) {
     suspend fun rentalsGetMettingRoom(id : Int) = apiHelper.rentalsGetMettingRoom(id)
 
     suspend fun deleteRentals(id : Int) = apiHelper.deleteRentals(id)
+
+    suspend fun deleteMeetingRooms(body : DataResponseDepartment) = apiHelper.deleteMeetingRooms(body)
+
+    suspend fun updateMeetingRooms(body : DataResponseDepartment) = apiHelper.updateMeetingRooms(body)
 
 }
