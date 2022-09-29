@@ -60,6 +60,9 @@ interface ApiService {
     @HTTP(method = "DELETE", path = "meeting-rooms", hasBody = true)
     suspend fun deleteMeetingRooms(@Body body: DataResponseDepartment) : Response<BaseModel>
 
+    @HTTP(method = "DELETE", path = "users", hasBody = true)
+    suspend fun deleteUser(@Body body: UserModel) : Response<BaseModel>
+
     @POST("meeting-rooms")
     suspend fun updateMeetingRooms(@Body body: DataResponseDepartment) : Response<BaseModel>
 

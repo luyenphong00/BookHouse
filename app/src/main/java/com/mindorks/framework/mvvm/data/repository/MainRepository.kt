@@ -35,6 +35,8 @@ class MainRepository (private val apiHelper: ApiService) {
 
     suspend fun deleteMeetingRooms(body : DataResponseDepartment) = apiHelper.deleteMeetingRooms(body)
 
+    suspend fun deleteUser(body : UserModel) = apiHelper.deleteUser(body)
+
     suspend fun updateMeetingRooms(body : DataResponseDepartment) = apiHelper.updateMeetingRooms(body)
 
 }

@@ -19,6 +19,7 @@ class DetailModel(
     var lstService = MutableLiveData<Resource<EquipmentsResponse>>()
     var rentLiveData = MutableLiveData<Resource<ResponseBody>>()
     var lstUserLiveData = MutableLiveData<Resource<ResponseUser>>()
+    var deleteUserLiveData = MutableLiveData<Resource<BaseModel>>()
 
     fun fetchEquipments(){
         viewModelScope.launch(IO){
@@ -96,6 +97,26 @@ class DetailModel(
                 }
             } else {
                 lstUserLiveData.postValue(Resource.error("No internet connection", null))
+            }
+        }
+    }
+
+    fun deleteUser(userModel : UserModel){
+        viewModelScope.launch(IO){
+            lstUserLiveData.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = mainRepository.deleteUser(userModel)
+                    if (response.isSuccessful) {
+                        deleteUserLiveData.postValue(Resource.success(response.body()))
+                    } else {
+                        deleteUserLiveData.postValue(Resource.error("", null))
+                    }
+                }catch (e : Exception){
+                    deleteUserLiveData.postValue(Resource.error(e.message?:"", null))
+                }
+            } else {
+                deleteUserLiveData.postValue(Resource.error("No internet connection", null))
             }
         }
     }

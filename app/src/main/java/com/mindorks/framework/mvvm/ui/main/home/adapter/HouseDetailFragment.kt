@@ -39,10 +39,10 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
     override fun initEvent() {
         super.initEvent()
         binding.submit.setOnClickListener {
-            if (count == 0) {
-                showMessage("Vui lòng chọn số giờ thuê")
-                return@setOnClickListener
-            }
+//            if (count == 0) {
+//                showMessage("Vui lòng chọn số giờ thuê")
+//                return@setOnClickListener
+//            }
             val meetTingRoom = RoomBock(
                 response?.id,
                 adapterUser?.getLstUser().toString(),

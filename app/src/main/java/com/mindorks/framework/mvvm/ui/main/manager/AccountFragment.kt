@@ -24,7 +24,7 @@ class AccountFragment : CommonFragment<FragmentAccountBinding, DetailModel>() {
         }
 
         adapter = AccountAdapter(requireContext()) {
-
+            viewModel.deleteUser(it)
         }
         with(binding){
             rclHouse.adapter = adapter
@@ -47,6 +47,25 @@ class AccountFragment : CommonFragment<FragmentAccountBinding, DetailModel>() {
                         }
                     }
                     Status.ERROR -> {
+                        loading(false)
+                    }
+                    Status.LOADING -> {
+                        loading(true)
+                    }
+                }
+            }
+
+        }
+
+        viewModel.deleteUserLiveData.observe(viewLifecycleOwner) {
+            it?.let { source ->
+                when(source.status){
+                    Status.SUCCESS -> {
+                        loading(false)
+                        showMessage("Xóa thành công")
+                    }
+                    Status.ERROR -> {
+                        showMessage("Xóa thành công")
                         loading(false)
                     }
                     Status.LOADING -> {

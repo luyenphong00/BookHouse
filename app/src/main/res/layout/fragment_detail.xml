@@ -97,7 +97,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:gravity="center_vertical"
-                        android:text="Số giờ thuê"
+                        android:text="Đến giờ"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"

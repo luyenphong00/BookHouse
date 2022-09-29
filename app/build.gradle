@@ -17,7 +17,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField 'String', 'BASE_URL', "\"http://192.168.2.109/DoAnDuongDucThang/server.php/api/\""
+        buildConfigField 'String', 'BASE_URL', "\"http://192.168.43.193/DoAnDuongDucThang/server.php/api/\""
         buildConfigField 'String', 'BASE_URL_IMAGE', "\"http://192.168.43.193/DoAnDuongDucThang/public/\""
 
     }

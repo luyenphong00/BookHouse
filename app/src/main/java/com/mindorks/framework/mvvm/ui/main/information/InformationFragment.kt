@@ -1,5 +1,6 @@
 package com.mindorks.framework.mvvm.ui.main.information
 
+import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.mindorks.framework.mvvm.common.CommonFragment
 import com.mindorks.framework.mvvm.data.model.UserModel
 import com.mindorks.framework.mvvm.databinding.FragmentHomeBinding
 import com.mindorks.framework.mvvm.databinding.FragmentInfomationBinding
+import com.mindorks.framework.mvvm.ui.main.login.LoginActivity
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -48,6 +50,7 @@ class InformationFragment : CommonFragment<FragmentInfomationBinding, BaseViewMo
                 findNavController().navigate(R.id.action_nav_information_to_nav_update_info)
             }
             logout.setOnClickListener {
+                startActivity(Intent(requireContext(),LoginActivity::class.java))
                 activity?.finish()
             }
         }

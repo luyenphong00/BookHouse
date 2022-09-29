@@ -25,7 +25,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/ic_frame_36569"
             android:hint="Tên đăng nhập"
-            android:text="Khac.tuan33@gmail.com"
+            android:text="contact123123@bctech.vn"
             android:padding="8dp"
             android:textColor="@android:color/black"
             android:textColorHint="#454545"
@@ -40,7 +40,7 @@
             android:background="@drawable/ic_frame_36569"
             android:hint="Mật khẩu"
             android:padding="8dp"
-            android:text="123@123"
+            android:text="ADMIN123"
             android:textColor="@android:color/black"
             android:textColorHint="#454545"
             android:textSize="12sp" />
