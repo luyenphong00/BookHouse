@@ -2,7 +2,6 @@ package com.mindorks.framework.mvvm.ui.main.home.adapter
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
-import android.util.Log
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.mindorks.framework.mvvm.common.BaseViewModel
@@ -11,7 +10,7 @@ import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
 import com.mindorks.framework.mvvm.data.model.RentalEquipmentsRequest
 import com.mindorks.framework.mvvm.data.model.RentalServicesRequest
 import com.mindorks.framework.mvvm.data.model.RoomBock
-import com.mindorks.framework.mvvm.databinding.FragmentHouseDetailBinding
+import com.mindorks.framework.mvvm.databinding.FragmentDetailBinding
 import com.mindorks.framework.mvvm.ui.main.adapter.DeviceAdapter
 import com.mindorks.framework.mvvm.ui.main.adapter.UserAdapter
 import com.mindorks.framework.mvvm.ui.main.dialog.DialogCheckLink
@@ -23,32 +22,36 @@ import com.mindorks.framework.mvvm.utils.Utils.currencyFormat
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
-class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewModel>() {
+class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>() {
     override val viewModel: DetailModel by viewModel()
     private var adapterEquiment: DeviceAdapter? = null
     private var adapterService: DeviceAdapter? = null
-    private var adapterUser : UserAdapter? = null
-    private var response : DataResponseDepartment? = null
+    private var adapterUser: UserAdapter? = null
+    private var response: DataResponseDepartment? = null
     private val sharedViewModel by sharedViewModel<MainViewModel>()
     var picker: TimePickerDialog? = null
     private var count = 0
 
-    override fun getViewBinding(): FragmentHouseDetailBinding =
-        FragmentHouseDetailBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentDetailBinding =
+        FragmentDetailBinding.inflate(layoutInflater)
 
     override fun initEvent() {
         super.initEvent()
         binding.submit.setOnClickListener {
-            if (count == 0){
+            if (count == 0) {
                 showMessage("Vui lòng chọn số giờ thuê")
                 return@setOnClickListener
             }
-            val meetTingRoom = RoomBock(response?.id,adapterUser?.getLstUser().toString(),getDataRentalServices(),getDataRentalEquipment())
+            val meetTingRoom = RoomBock(
+                response?.id,
+                adapterUser?.getLstUser().toString(),
+                getDataRentalServices(),
+                getDataRentalEquipment()
+            )
             val totalMoney = (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
                 adapterEquiment?.getTotalMoney()?.toLong()
-                    ?.plus(it1)?.plus(response?.price?.toLong()?:0)
+                    ?.plus(it1)?.plus(response?.price?.toLong() ?: 0)
             }).toString()
 
             DialogCheckLink(requireContext(), totalMoney) {
@@ -56,20 +59,21 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
             }.show()
         }
 
-        binding.alarm.setOnClickListener {
+        binding.abc.setOnClickListener {
             val cldr: Calendar = Calendar.getInstance()
             val hour: Int = cldr.get(Calendar.HOUR_OF_DAY)
             var minutes: Int = cldr.get(Calendar.MINUTE)
-            picker = TimePickerDialog(requireContext(),
+            picker = TimePickerDialog(
+                requireContext(),
                 { tp, sHour, sMinute ->
                     var replaceMinute: String
                     var replacesHour: String
                     replaceMinute = sMinute.toString()
-                    if (replaceMinute.toInt() < 10){
+                    if (replaceMinute.toInt() < 10) {
                         replaceMinute = "0${replaceMinute}"
                     }
                     replacesHour = sHour.toString()
-                    if (replacesHour.toInt() < 10){
+                    if (replacesHour.toInt() < 10) {
                         replacesHour = "0${replacesHour}"
                     }
                     binding.tvTime.text = "$replacesHour:$replaceMinute"
@@ -78,18 +82,6 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
             picker?.show()
         }
 
-        binding.add.setOnClickListener {
-            count++
-            binding.count.text = "${count}"
-        }
-
-        binding.remove.setOnClickListener {
-            if (count > 0){
-                count--
-                binding.count.text = "${count}"
-                return@setOnClickListener
-            }
-        }
     }
 
     fun getDataRentalServices(): ArrayList<RentalServicesRequest> {
@@ -209,11 +201,11 @@ class HouseDetailFragment : CommonFragment<FragmentHouseDetailBinding, BaseViewM
 
         viewModel.lstUserLiveData.observe(viewLifecycleOwner) {
             it?.let { source ->
-                when(source.status){
+                when (source.status) {
                     Status.SUCCESS -> {
                         showLoading(false)
                         source.data?.let { response ->
-                            if (response.lstUser?.isNotEmpty() == true){
+                            if (response.lstUser?.isNotEmpty() == true) {
                                 adapterUser?.updateData(response.lstUser)
                                 sharedViewModel.userModel?.let { it1 -> adapterUser?.update(it1) }
                             }

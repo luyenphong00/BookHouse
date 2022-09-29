@@ -7,16 +7,16 @@ import androidx.navigation.fragment.findNavController
 import com.mindorks.framework.mvvm.R
 import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonFragment
+import com.mindorks.framework.mvvm.databinding.FragmentDetailBinding
 import com.mindorks.framework.mvvm.databinding.FragmentHistoryBinding
-import com.mindorks.framework.mvvm.databinding.FragmentHouseDetailBinding
 
-class DetailHistoryFragment : CommonFragment<FragmentHouseDetailBinding,BaseViewModel>() {
+class DetailHistoryFragment : CommonFragment<FragmentDetailBinding,BaseViewModel>() {
 
     private var historyAdapter : HistoryAdapter? = null
     override val viewModel: ViewModel by viewModels()
     private var lstFake = mutableListOf<String>()
 
-    override fun getViewBinding(): FragmentHouseDetailBinding = FragmentHouseDetailBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentDetailBinding = FragmentDetailBinding.inflate(layoutInflater)
 
     override fun initData() {
         super.initData()
