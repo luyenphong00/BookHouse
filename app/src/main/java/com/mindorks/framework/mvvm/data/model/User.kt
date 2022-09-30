@@ -131,8 +131,9 @@ data class RoomBock(
     @SerializedName("hour_end") var hour_end: String = "2022-09-20 21:52:41",
     @SerializedName("date") var date: String = "2022-09-20 21:52:41",
     @SerializedName("status") var status: Int = 1,
-
 )
+
+data class ResponseRoomBock(@SerializedName("data") var data: String?) : BaseModel()
 
 data class RentalServicesRequest(
     @SerializedName("service_id") var service_id: Int? = 0,

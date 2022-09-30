@@ -137,7 +137,7 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                 }else {
                     (monthOfYear + 1).toString()
                 }
-                binding.tvCalendar.text = "${year}-${replateDays}-${replaceMonth}"
+                binding.tvCalendar.text = "${year}-${replaceMonth}-${replateDays}"
                 lastSelectedYear = year
                 lastSelectedMonth = monthOfYear
                 lastSelectedDayOfMonth = dayOfMonth
@@ -252,12 +252,17 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                 when (source.status) {
                     Status.SUCCESS -> {
                         showLoading(false)
-                        showMessage("Đặt phòng thành công")
-                        findNavController().popBackStack()
+                        source.data?.let { res ->
+                            findNavController().popBackStack()
+                            showMessage(res.message?:"")
+                        } ?: kotlin.run {
+                            showMessage(source.message?:"")
+                        }
+
                     }
                     Status.ERROR -> {
                         showLoading(false)
-                        showMessage("Đặt phòng thất bại")
+                        showMessage(source.message?:"")
                     }
                     Status.LOADING -> {
                         showLoading(true)

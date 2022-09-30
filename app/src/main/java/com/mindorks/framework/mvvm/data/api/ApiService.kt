@@ -1,7 +1,6 @@
 package com.mindorks.framework.mvvm.data.api
 
 import com.mindorks.framework.mvvm.data.model.*
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -31,7 +30,7 @@ interface ApiService {
 
     // thue phong tro
     @POST("rentals")
-    suspend fun rent(@Body roomBock: RoomBock) : Response<ResponseBody>
+    suspend fun rent(@Body roomBock: RoomBock) : Response<ResponseRoomBock>
 
     // http://127.0.0.1:8000/api/departments
     @GET("departments")

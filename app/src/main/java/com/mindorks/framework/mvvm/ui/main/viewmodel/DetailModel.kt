@@ -1,6 +1,7 @@
 package com.mindorks.framework.mvvm.ui.main.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.data.model.*
 import com.mindorks.framework.mvvm.data.repository.MainRepository
@@ -8,7 +9,6 @@ import com.mindorks.framework.mvvm.utils.NetworkHelper
 import com.mindorks.framework.mvvm.utils.Resource
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 
 class DetailModel(
     private val mainRepository: MainRepository,
@@ -17,12 +17,12 @@ class DetailModel(
 
     var lstEquipment = MutableLiveData<Resource<EquipmentsResponse>>()
     var lstService = MutableLiveData<Resource<EquipmentsResponse>>()
-    var rentLiveData = MutableLiveData<Resource<ResponseBody>>()
+    var rentLiveData = MutableLiveData<Resource<ResponseRoomBock>>()
     var lstUserLiveData = MutableLiveData<Resource<ResponseUser>>()
     var deleteUserLiveData = MutableLiveData<Resource<BaseModel>>()
 
-    fun fetchEquipments(){
-        viewModelScope.launch(IO){
+    fun fetchEquipments() {
+        viewModelScope.launch(IO) {
             lstEquipment.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
@@ -30,10 +30,15 @@ class DetailModel(
                     if (response.isSuccessful) {
                         lstEquipment.postValue(Resource.success(response.body()))
                     } else {
-                        lstEquipment.postValue(Resource.error(response.errorBody().toString(), null))
+                        lstEquipment.postValue(
+                            Resource.error(
+                                response.errorBody().toString(),
+                                null
+                            )
+                        )
                     }
-                }catch (e : Exception){
-                    lstEquipment.postValue(Resource.error(e.message?:"", null))
+                } catch (e: Exception) {
+                    lstEquipment.postValue(Resource.error(e.message ?: "", null))
                 }
             } else {
                 lstEquipment.postValue(Resource.error("No internet connection", null))
@@ -41,8 +46,8 @@ class DetailModel(
         }
     }
 
-    fun fetchService(){
-        viewModelScope.launch(IO){
+    fun fetchService() {
+        viewModelScope.launch(IO) {
             lstService.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
@@ -52,8 +57,8 @@ class DetailModel(
                     } else {
                         lstService.postValue(Resource.error(response.errorBody().toString(), null))
                     }
-                }catch (e : Exception){
-                    lstService.postValue(Resource.error(e.message?:"", null))
+                } catch (e: Exception) {
+                    lstService.postValue(Resource.error(e.message ?: "", null))
                 }
             } else {
                 lstService.postValue(Resource.error("No internet connection", null))
@@ -61,19 +66,23 @@ class DetailModel(
         }
     }
 
-    fun rent(roomBock: RoomBock){
-        viewModelScope.launch(IO){
+    fun rent(roomBock: RoomBock) {
+        viewModelScope.launch(IO) {
             rentLiveData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
                     val response = mainRepository.rent(roomBock)
                     if (response.isSuccessful) {
-                        rentLiveData.postValue(Resource.success(null))
+                        if (response.body()?.status == 200){
+                            rentLiveData.postValue(Resource.success(response.body()))
+                        }else {
+                            rentLiveData.postValue(Resource.error(response.body()?.message ?: "", null))
+                        }
                     } else {
                         rentLiveData.postValue(Resource.error("", null))
                     }
-                }catch (e : Exception){
-                    rentLiveData.postValue(Resource.error(e.message?:"", null))
+                } catch (e: Exception) {
+                    rentLiveData.postValue(Resource.error(e.message ?: "", null))
                 }
             } else {
                 rentLiveData.postValue(Resource.error("No internet connection", null))
@@ -81,8 +90,8 @@ class DetailModel(
         }
     }
 
-    fun getListUser(){
-        viewModelScope.launch(IO){
+    fun getListUser() {
+        viewModelScope.launch(IO) {
             lstUserLiveData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
@@ -92,8 +101,8 @@ class DetailModel(
                     } else {
                         lstUserLiveData.postValue(Resource.error("", null))
                     }
-                }catch (e : Exception){
-                    lstUserLiveData.postValue(Resource.error(e.message?:"", null))
+                } catch (e: Exception) {
+                    lstUserLiveData.postValue(Resource.error(e.message ?: "", null))
                 }
             } else {
                 lstUserLiveData.postValue(Resource.error("No internet connection", null))
@@ -101,8 +110,8 @@ class DetailModel(
         }
     }
 
-    fun deleteUser(userModel : UserModel){
-        viewModelScope.launch(IO){
+    fun deleteUser(userModel: UserModel) {
+        viewModelScope.launch(IO) {
             lstUserLiveData.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
@@ -112,8 +121,8 @@ class DetailModel(
                     } else {
                         deleteUserLiveData.postValue(Resource.error("", null))
                     }
-                }catch (e : Exception){
-                    deleteUserLiveData.postValue(Resource.error(e.message?:"", null))
+                } catch (e: Exception) {
+                    deleteUserLiveData.postValue(Resource.error(e.message ?: "", null))
                 }
             } else {
                 deleteUserLiveData.postValue(Resource.error("No internet connection", null))
