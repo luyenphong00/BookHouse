@@ -1,10 +1,11 @@
 package com.mindorks.framework.mvvm.utils
 
+import com.mindorks.framework.mvvm.BuildConfig
 import java.text.DecimalFormat
 
 object Utils {
 
-    const val URL_IMAGE = "http://192.168.1.71/DoAnDuongDucThang/public/"
+    const val URL_IMAGE = BuildConfig.BASE_URL_IMAGE
     fun currencyFormat(amount: String): String? {
         if (amount == ""){
             return "0"

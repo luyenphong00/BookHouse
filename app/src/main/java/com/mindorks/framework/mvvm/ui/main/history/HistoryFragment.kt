@@ -4,6 +4,7 @@ import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonFragment
 import com.mindorks.framework.mvvm.data.model.Result
 import com.mindorks.framework.mvvm.databinding.FragmentHistoryBinding
+import com.mindorks.framework.mvvm.ui.main.dialog.DialogDeleteVideo
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import com.mindorks.framework.mvvm.utils.Status
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -28,7 +29,9 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
 
         },{
             dataDelete = it
-            viewModel.deleteRentals(it.id?.toInt() ?: 0)
+            DialogDeleteVideo(requireContext()) {
+                viewModel.deleteRentals(it.id?.toInt() ?: 0)
+            }.show()
         })
         binding.rclHistory.adapter = historyAdapter
     }
