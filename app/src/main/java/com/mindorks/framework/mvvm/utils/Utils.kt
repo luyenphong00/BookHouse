@@ -4,7 +4,7 @@ import java.text.DecimalFormat
 
 object Utils {
 
-    const val URL_IMAGE = "http://192.168.43.193/DoAnDuongDucThang/public/"
+    const val URL_IMAGE = "http://192.168.1.71/DoAnDuongDucThang/public/"
     fun currencyFormat(amount: String): String? {
         if (amount == ""){
             return "0"

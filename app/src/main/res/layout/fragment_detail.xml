@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar"
-        app:srcCompat="@drawable/ic_baseline_access_alarm_24" />
+        app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,10 +67,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="4.300.000 đ"
-                    android:textColor="#21C3FF"
+                    android:textColor="#0277BD"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_calendar"
+                    android:layout_width="wrap_content"
+                    android:text="Ngày :"
+                    android:paddingVertical="5dp"
+                    android:textColor="@android:color/black"
+                    android:layout_height="wrap_content"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -80,7 +88,7 @@
                         android:id="@+id/time_start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="5dp"
+                        android:paddingVertical="8dp"
                         android:text="Bắt đầu từ giờ"
                         android:textColor="@android:color/black" />
 
@@ -88,23 +96,40 @@
                         android:id="@+id/tv_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:drawablePadding="4dp"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
                         android:text="00:00"
-                        android:padding="4dp"
                         android:textColor="@android:color/black"
+                        app:drawableStartCompat="@drawable/ic_baseline_access_alarm_24"
+                        app:drawableTint="#00EAFF"
                         app:layout_constraintEnd_toEndOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
+                        android:paddingVertical="8dp"
                         android:text="Đến giờ"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/remove"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/remove" />
+                        app:layout_constraintTop_toBottomOf="@+id/time_start" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="4dp"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="00:00"
+                        android:textColor="@android:color/black"
+                        app:drawableStartCompat="@drawable/ic_baseline_access_alarm_24"
+                        app:drawableTint="#00EAFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/time_start" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,14 +198,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_bg_button"
         android:gravity="center"
         android:text="Đặt phòng"
-        android:textColor="@android:color/white"
+        android:textColor="#616161"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

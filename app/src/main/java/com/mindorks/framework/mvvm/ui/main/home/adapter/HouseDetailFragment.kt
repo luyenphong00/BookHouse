@@ -1,6 +1,9 @@
 package com.mindorks.framework.mvvm.ui.main.home.adapter
 
+import android.R
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -23,6 +26,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
+
 class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>() {
     override val viewModel: DetailModel by viewModel()
     private var adapterEquiment: DeviceAdapter? = null
@@ -31,7 +35,13 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
     private var response: DataResponseDepartment? = null
     private val sharedViewModel by sharedViewModel<MainViewModel>()
     var picker: TimePickerDialog? = null
-    private var count = 0
+    var  calendar = Calendar.getInstance()
+    var lastSelectedYear = calendar.get(Calendar.YEAR)
+    var lastSelectedMonth = calendar.get(Calendar.MONTH)
+    var lastSelectedDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+    var selectTimeStart = false
+    var selectTimeEnd = false
+    var selectCalendar = false
 
     override fun getViewBinding(): FragmentDetailBinding =
         FragmentDetailBinding.inflate(layoutInflater)
@@ -39,27 +49,32 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
     override fun initEvent() {
         super.initEvent()
         binding.submit.setOnClickListener {
-//            if (count == 0) {
-//                showMessage("Vui lòng chọn số giờ thuê")
-//                return@setOnClickListener
-//            }
-            val meetTingRoom = RoomBock(
-                response?.id,
-                adapterUser?.getLstUser().toString(),
-                getDataRentalServices(),
-                getDataRentalEquipment()
-            )
-            val totalMoney = (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
-                adapterEquiment?.getTotalMoney()?.toLong()
-                    ?.plus(it1)?.plus(response?.price?.toLong() ?: 0)
-            }).toString()
+            if (selectTimeStart && selectTimeEnd && selectCalendar){
+                val meetTingRoom = RoomBock(
+                    response?.id,
+                    adapterUser?.getLstUser().toString(),
+                    getDataRentalServices(),
+                    getDataRentalEquipment(),
+                    binding.timeStart.text.toString(), binding.tvEnd.text.toString(), binding.tvCalendar.text.toString()
+                )
+                val totalMoney = (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
+                    adapterEquiment?.getTotalMoney()?.toLong()
+                        ?.plus(it1)?.plus(response?.price?.toLong() ?: 0)
+                }).toString()
 
-            DialogCheckLink(requireContext(), totalMoney) {
-                viewModel.rent(meetTingRoom)
-            }.show()
+                DialogCheckLink(requireContext(), totalMoney) {
+                    viewModel.rent(meetTingRoom)
+                }.show()
+            }else {
+                showMessage("Chọn đủ thông tin")
+            }
         }
 
         binding.abc.setOnClickListener {
+            buttonSelectDate()
+        }
+
+        binding.tvTime.setOnClickListener {
             val cldr: Calendar = Calendar.getInstance()
             val hour: Int = cldr.get(Calendar.HOUR_OF_DAY)
             var minutes: Int = cldr.get(Calendar.MINUTE)
@@ -77,11 +92,63 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                         replacesHour = "0${replacesHour}"
                     }
                     binding.tvTime.text = "$replacesHour:$replaceMinute"
+                    selectTimeStart = true
+                }, hour, minutes, true
+            )
+            picker?.show()
+        }
+        binding.tvEnd.setOnClickListener {
+            val cldr: Calendar = Calendar.getInstance()
+            val hour: Int = cldr.get(Calendar.HOUR_OF_DAY)
+            var minutes: Int = cldr.get(Calendar.MINUTE)
+            picker = TimePickerDialog(
+                requireContext(),
+                { tp, sHour, sMinute ->
+                    var replaceMinute: String
+                    var replacesHour: String
+                    replaceMinute = sMinute.toString()
+                    if (replaceMinute.toInt() < 10) {
+                        replaceMinute = "0${replaceMinute}"
+                    }
+                    replacesHour = sHour.toString()
+                    if (replacesHour.toInt() < 10) {
+                        replacesHour = "0${replacesHour}"
+                    }
+                    binding.tvEnd.text = "$replacesHour:$replaceMinute"
+                    selectTimeEnd = true
                 }, hour, minutes, true
             )
             picker?.show()
         }
 
+    }
+
+    private fun buttonSelectDate() {
+        // Date Select Listener.
+        val dateSetListener =
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                var replateDays = dayOfMonth.toString()
+                if (replateDays.toInt() < 10) {
+                    replateDays = "0${replateDays}"
+                }
+                var replaceMonth = ""
+                replaceMonth = if ((monthOfYear + 1).toString().length == 1){
+                    "0${monthOfYear + 1}"
+                }else {
+                    (monthOfYear + 1).toString()
+                }
+                binding.tvCalendar.text = "${year}-${replaceMonth}-${replateDays}"
+                lastSelectedYear = year
+                lastSelectedMonth = monthOfYear
+                lastSelectedDayOfMonth = dayOfMonth
+                selectCalendar = true
+            }
+        var datePickerDialog: DatePickerDialog? = null
+        datePickerDialog = DatePickerDialog(
+            requireContext(),
+            dateSetListener, lastSelectedYear, lastSelectedMonth, lastSelectedDayOfMonth
+        )
+        datePickerDialog.show()
     }
 
     fun getDataRentalServices(): ArrayList<RentalServicesRequest> {

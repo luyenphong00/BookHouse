@@ -127,8 +127,9 @@ data class RoomBock(
     @SerializedName("user_id") var userId: String?,
     @SerializedName("rental_services") var rentalServices: ArrayList<RentalServicesRequest>?,
     @SerializedName("rental_equipments") var rentalEquipment: ArrayList<RentalEquipmentsRequest>?,
-    @SerializedName("rental_start") var rental_start: String = "2022-09-03 21:52:40",
-    @SerializedName("renral_end") var renral_end: String = "2022-09-20 21:52:41",
+    @SerializedName("hour_start") var hour_start: String = "2022-09-03 21:52:40",
+    @SerializedName("hour_end") var hour_end: String = "2022-09-20 21:52:41",
+    @SerializedName("date") var date: String = "2022-09-20 21:52:41",
     @SerializedName("status") var status: Int = 1,
 
 )
