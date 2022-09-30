@@ -55,7 +55,7 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                     adapterUser?.getLstUser().toString(),
                     getDataRentalServices(),
                     getDataRentalEquipment(),
-                    binding.timeStart.text.toString(), binding.tvEnd.text.toString(), binding.tvCalendar.text.toString()
+                    binding.tvTime.text.toString(), binding.tvEnd.text.toString(), binding.tvCalendar.text.toString()
                 )
                 val totalMoney = (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
                     adapterEquiment?.getTotalMoney()?.toLong()
@@ -137,7 +137,7 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                 }else {
                     (monthOfYear + 1).toString()
                 }
-                binding.tvCalendar.text = "${year}-${replaceMonth}-${replateDays}"
+                binding.tvCalendar.text = "${year}-${replateDays}-${replaceMonth}"
                 lastSelectedYear = year
                 lastSelectedMonth = monthOfYear
                 lastSelectedDayOfMonth = dayOfMonth
