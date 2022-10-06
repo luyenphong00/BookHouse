@@ -102,8 +102,8 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         resource.data?.let { result ->
-                            if (result.data?.isNotEmpty() == true) {
-                                houseAdapterType1?.updateData(result.data)
+                            if (result.isNotEmpty()) {
+                                houseAdapterType2?.updateData(result as ArrayList<DataResponseDepartment>)
                             }
                         }
                         getMainActivity()?.showLoading(false)

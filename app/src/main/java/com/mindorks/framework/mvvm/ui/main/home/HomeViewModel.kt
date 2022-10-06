@@ -28,7 +28,7 @@ class HomeViewModel(
     val lstHouseSearch = mutableListOf<DataResponseDepartment>()
     val meetingRoomsResponse = MutableLiveData<Resource<DepartmentsModel>>()
     val lstHouseUpdate = MutableLiveData<Resource<MutableList<DataResponseDepartment>>>()
-    val lstSearch = MutableLiveData<Resource<DepartmentsModel>>()
+    val lstSearch = MutableLiveData<Resource<MutableList<DataResponseDepartment>>>()
 
     fun getMeetingRooms() {
         viewModelScope.launch(IO) {
@@ -103,7 +103,7 @@ class HomeViewModel(
                                     }
                                 }
                             }
-                            lstSearch.postValue(Resource.success(it.body()))
+                            lstSearch.postValue(Resource.success(lstHouseSearch))
                         } else lstSearch.postValue(
                             Resource.error(it.errorBody().toString(), null)
                         )
