@@ -76,4 +76,7 @@ interface ApiService {
     @GET("rentals_get_metting_room_of_user")
     suspend fun  rentalsGetMettingRoom(@Query("user_id") id : Int) : Response<EntalsGetMettingModel>
 
+    @POST("room_empty")
+    suspend fun search(@Body body : SearchRequest) : Response<DepartmentsModel>
+
 }

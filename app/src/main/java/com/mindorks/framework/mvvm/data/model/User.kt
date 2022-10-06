@@ -89,7 +89,7 @@ data class UserModel(
     @SerializedName("ethnicity") var ethnicity: String?,
     @SerializedName("domicile") var domicile: String?,
     @SerializedName("admin") var admin: Int?,
-    var select : Boolean? = false
+    var select: Boolean? = false
 ) : Parcelable
 
 data class EquipmentsResponse(@Json(name = "data") val data: ArrayList<EquipmentModel>?) :
@@ -127,9 +127,9 @@ data class RoomBock(
     @SerializedName("user_id") var userId: String?,
     @SerializedName("rental_services") var rentalServices: ArrayList<RentalServicesRequest>?,
     @SerializedName("rental_equipments") var rentalEquipment: ArrayList<RentalEquipmentsRequest>?,
-    @SerializedName("hour_start") var hour_start: String = "2022-09-03 21:52:40",
-    @SerializedName("hour_end") var hour_end: String = "2022-09-20 21:52:41",
-    @SerializedName("date") var date: String = "2022-09-20 21:52:41",
+    @SerializedName("hour_start") var hour_start: String = "21:52:40",
+    @SerializedName("hour_end") var hour_end: String = "21:53:41",
+    @SerializedName("date") var date: String = "2022-09-20",
     @SerializedName("status") var status: Int = 1,
 )
 
@@ -143,4 +143,10 @@ data class RentalServicesRequest(
 data class RentalEquipmentsRequest(
     @SerializedName("equipment_id") var service_id: Int? = 0,
     @SerializedName("quantity") var quantity: Int? = 0,
+)
+
+data class SearchRequest(
+    @SerializedName("hour_start") var hour_start: String,
+    @SerializedName("hour_end") var hour_end: String,
+    @SerializedName("date") var date: String,
 )

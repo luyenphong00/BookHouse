@@ -1,10 +1,7 @@
 package com.mindorks.framework.mvvm.data.repository
 
 import com.mindorks.framework.mvvm.data.api.ApiService
-import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
-import com.mindorks.framework.mvvm.data.model.LoginBody
-import com.mindorks.framework.mvvm.data.model.RoomBock
-import com.mindorks.framework.mvvm.data.model.UserModel
+import com.mindorks.framework.mvvm.data.model.*
 
 class MainRepository (private val apiHelper: ApiService) {
 
@@ -22,6 +19,8 @@ class MainRepository (private val apiHelper: ApiService) {
     suspend fun getDetailUser(id : String) = apiHelper.getUser(id)
 
     suspend fun fetChMeetingRoom() = apiHelper.meetingRooms()
+
+    suspend fun search(body : SearchRequest) = apiHelper.search(body)
 
     suspend fun getRentals(id : Int) = apiHelper.getRentals(id)
 

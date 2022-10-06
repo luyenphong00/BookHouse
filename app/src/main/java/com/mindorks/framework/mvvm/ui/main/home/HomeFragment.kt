@@ -7,7 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.mindorks.framework.mvvm.R
 import com.mindorks.framework.mvvm.common.CommonFragment
 import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
+import com.mindorks.framework.mvvm.data.model.SearchRequest
 import com.mindorks.framework.mvvm.databinding.FragmentHomeBinding
+import com.mindorks.framework.mvvm.ui.main.dialog.DialogSearch
 import com.mindorks.framework.mvvm.ui.main.home.adapter.HouseAdapter
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import com.mindorks.framework.mvvm.utils.Status
@@ -37,11 +39,17 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
             findNavController().navigate(R.id.action_nav_home_to_nav_detail,bundle)
         }
 
-        houseAdapterType2 = HouseAdapter(requireContext(), 1) {
-            findNavController().navigate(R.id.action_nav_home_to_nav_detail)
+        houseAdapterType2 = HouseAdapter(requireContext(), 0) {
+            val bundle = Bundle()
+            bundle.putParcelable("obj",it)
+            findNavController().navigate(R.id.action_nav_home_to_nav_detail,bundle)
         }
         with(binding) {
             rclHouse.adapter = houseAdapterType1
+            rclSearch.adapter = houseAdapterType2
+            search.setOnClickListener {
+                showSearch()
+            }
         }
     }
 
@@ -88,6 +96,33 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         }
+
+        viewModel.lstSearch.observe(viewLifecycleOwner) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { result ->
+                            if (result.data?.isNotEmpty() == true) {
+                                houseAdapterType1?.updateData(result.data)
+                            }
+                        }
+                        getMainActivity()?.showLoading(false)
+                    }
+                    Status.ERROR -> {
+                        getMainActivity()?.showLoading(false)
+                    }
+                    Status.LOADING -> {
+                        getMainActivity()?.showLoading(true)
+                    }
+                }
+            }
+        }
+    }
+
+    fun showSearch(){
+        DialogSearch(requireContext()) {
+            viewModel.search(it)
+        }.show()
     }
 
     override fun onDestroyView() {

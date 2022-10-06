@@ -1,14 +1,16 @@
 package com.mindorks.framework.mvvm.ui.main.home
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
 import com.mindorks.framework.mvvm.data.model.DepartmentsModel
+import com.mindorks.framework.mvvm.data.model.SearchRequest
 import com.mindorks.framework.mvvm.data.model.User
 import com.mindorks.framework.mvvm.data.repository.MainRepository
 import com.mindorks.framework.mvvm.utils.NetworkHelper
 import com.mindorks.framework.mvvm.utils.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -23,8 +25,10 @@ class HomeViewModel(
         get() = _users
 
     val lstHouseHome = mutableListOf<DataResponseDepartment>()
+    val lstHouseSearch = mutableListOf<DataResponseDepartment>()
     val meetingRoomsResponse = MutableLiveData<Resource<DepartmentsModel>>()
     val lstHouseUpdate = MutableLiveData<Resource<MutableList<DataResponseDepartment>>>()
+    val lstSearch = MutableLiveData<Resource<DepartmentsModel>>()
 
     fun getMeetingRooms() {
         viewModelScope.launch(IO) {
@@ -80,6 +84,34 @@ class HomeViewModel(
                     }
                 }
             } else lstHouseUpdate.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    fun search(body : SearchRequest) {
+        viewModelScope.launch(IO) {
+            lstSearch.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = mainRepository.search(body)
+                    response.let {
+                        if (it.isSuccessful) {
+                            it.body()?.let { body ->
+                                body.data?.let { list ->
+                                    if (list.isNotEmpty()) {
+                                        lstHouseSearch.clear()
+                                        lstHouseSearch.addAll(list)
+                                    }
+                                }
+                            }
+                            lstSearch.postValue(Resource.success(it.body()))
+                        } else lstSearch.postValue(
+                            Resource.error(it.errorBody().toString(), null)
+                        )
+                    }
+                }catch (e : Exception){
+                    lstSearch.postValue(Resource.error(e.toString(), null))
+                }
+            } else lstSearch.postValue(Resource.error("No internet connection", null))
         }
     }
 

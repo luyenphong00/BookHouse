@@ -66,6 +66,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
+            android:visibility="gone"
             android:background="@drawable/ic_bg_button"
             android:gravity="center"
             android:backgroundTint="#FF5722"
