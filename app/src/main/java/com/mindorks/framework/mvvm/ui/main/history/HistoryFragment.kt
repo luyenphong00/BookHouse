@@ -1,5 +1,8 @@
 package com.mindorks.framework.mvvm.ui.main.history
 
+import android.os.Bundle
+import androidx.navigation.fragment.findNavController
+import com.mindorks.framework.mvvm.R
 import com.mindorks.framework.mvvm.common.BaseViewModel
 import com.mindorks.framework.mvvm.common.CommonFragment
 import com.mindorks.framework.mvvm.data.model.Result
@@ -26,7 +29,8 @@ class HistoryFragment : CommonFragment<FragmentHistoryBinding, BaseViewModel>() 
             it.id?.let { it1 -> viewModel.getRentalsToMettingRoom(it1) }
         }
         historyAdapter = HistoryAdapter(requireContext(),{
-
+            sharedViewModel.result = it
+            findNavController().navigate(R.id.action_nav_detail_edit)
         },{
             dataDelete = it
             DialogDeleteVideo(requireContext()) {

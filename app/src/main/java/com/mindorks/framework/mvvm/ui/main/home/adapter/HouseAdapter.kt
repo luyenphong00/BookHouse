@@ -32,7 +32,7 @@ class HouseAdapter(var context: Context, var type: Int, private var onClick: (Da
             if (lstHouse.isNotEmpty()){
                 val item = lstHouse[position]
                 binding.tvName.text = item.name
-                binding.price.text = "Giá: ${currencyFormat(item.price?:"")} đ/tháng"
+                binding.price.text = "Giá: ${currencyFormat(item.price?:"")} đ/lần"
                 if (item.active == false){
                     binding.status.setTextColor(ContextCompat.getColor(context,R.color.color_red))
                     binding.status.text = context.getString(R.string.txt_da_thue)

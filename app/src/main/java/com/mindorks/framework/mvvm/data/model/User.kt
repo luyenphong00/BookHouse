@@ -42,21 +42,27 @@ data class EntalsGetMettingModel(@SerializedName("data") val data: ArrayList<Res
     BaseModel()
 
 data class Result(
-    @SerializedName("id") var id: Long?,
+    @SerializedName("id") var id: Int?,
     @SerializedName("meeting_room_id") var meetId: Long?,
     @SerializedName("user_id") var userId: String?,
     @SerializedName("total_money") var totalMoney: String?,
     @SerializedName("rental_services") var rentalServices: ArrayList<RentalServices>?,
+    @SerializedName("rental_equipments") var rental_equipments: ArrayList<RentalServices>?,
     @SerializedName("name_meeting_room") var nameRoom: String?,
     @SerializedName("path_img_meeting_room") var path: String?,
+    @SerializedName("price_meeting_room") var price_meeting_room: String?,
+    @SerializedName("hour_start") var hour_start: String?,
+    @SerializedName("hour_end") var hour_end: String?,
+    @SerializedName("date") var date: String?,
 )
 
 data class RentalServices(
-    @SerializedName("id") var id: Long?,
-    @SerializedName("service_id") var service_id: Long?,
+    @SerializedName("id") var id: Int?,
+    @SerializedName("service_id") var service_id: Int?,
     @SerializedName("quantity") var quantity: Long?,
     @SerializedName("rental_history_id") var rentalHistoryId: Long?,
     @SerializedName("created_at") var createdAt: String?,
+    @SerializedName("equipment_id") var equipment_id: Int?,
 )
 
 
@@ -130,6 +136,19 @@ data class RoomBock(
     @SerializedName("hour_start") var hour_start: String = "21:52:40",
     @SerializedName("hour_end") var hour_end: String = "21:53:41",
     @SerializedName("date") var date: String = "2022-09-20",
+    @SerializedName("id") var id: Int? = -1,
+    @SerializedName("status") var status: Int = 1,
+)
+
+data class RoomBockUpdate(
+    @SerializedName("meeting_room_id") var meetingRoomId: Int?,
+    @SerializedName("user_id") var userId: String?,
+    @SerializedName("rental_services") var rentalServices: ArrayList<RentalServicesRequest>?,
+    @SerializedName("rental_equipments") var rentalEquipment: ArrayList<RentalEquipmentsRequest>?,
+    @SerializedName("hour_start") var hour_start: String = "21:52:40",
+    @SerializedName("hour_end") var hour_end: String = "21:53:41",
+    @SerializedName("date") var date: String = "2022-09-20",
+    @SerializedName("id") var id: Int,
     @SerializedName("status") var status: Int = 1,
 )
 

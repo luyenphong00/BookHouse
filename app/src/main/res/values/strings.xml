@@ -5,4 +5,8 @@
     <string name="txt_detail">Chi tiết pòng họp</string>
     <string name="t_ph_ng">Đặt phòng</string>
     <string name="h_y_b">Hủy bỏ</string>
+    <string name="dangnhap">Đăng nhập</string>
+    <string name="ten_dn">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="thay_doi">Thay đổi</string>
 </resources>

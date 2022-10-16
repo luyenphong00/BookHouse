@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mindorks.framework.mvvm.data.model.Result
-import com.mindorks.framework.mvvm.databinding.ItemHouseActiveBinding
-import com.mindorks.framework.mvvm.databinding.ItemHouseBinding
 import com.mindorks.framework.mvvm.databinding.ItemHouseNewBinding
 import com.mindorks.framework.mvvm.utils.Utils
 import com.mindorks.framework.mvvm.utils.Utils.URL_IMAGE
@@ -65,13 +63,15 @@ class HistoryAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun removeData(result: Result){
-        if (lstHistory.isNotEmpty()){
-            lstHistory.forEach {
-                if (it.id == result.id){
-                    lstHistory.remove(result)
-                }
+
+        val iterator: MutableIterator<Result> = lstHistory.iterator()
+        while (iterator.hasNext()) {
+            val value = iterator.next()
+            if (value.id == result.id) {
+                iterator.remove()
             }
-            notifyDataSetChanged()
         }
+        notifyDataSetChanged()
+
     }
 }

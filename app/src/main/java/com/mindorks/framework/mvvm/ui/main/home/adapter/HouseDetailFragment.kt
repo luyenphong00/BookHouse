@@ -154,7 +154,6 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
     fun getDataRentalServices(): ArrayList<RentalServicesRequest> {
         val arrRental = ArrayList<RentalServicesRequest>()
         adapterService?.getDataSelect()?.forEach {
-            arrRental.clear()
             arrRental.add(RentalServicesRequest(it.id, it.count))
         }
         return arrRental
@@ -163,7 +162,6 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
     fun getDataRentalEquipment(): ArrayList<RentalEquipmentsRequest> {
         val arrRental = ArrayList<RentalEquipmentsRequest>()
         adapterEquiment?.getDataSelect()?.forEach {
-            arrRental.clear()
             arrRental.add(RentalEquipmentsRequest(it.id, it.count))
         }
         return arrRental

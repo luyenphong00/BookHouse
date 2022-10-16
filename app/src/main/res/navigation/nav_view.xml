@@ -51,6 +51,16 @@
         android:label="label_detail"
         tools:layout="@layout/fragment_detail" />
 
+    <action
+        android:id="@+id/action_nav_detail_edit"
+        app:destination="@id/nav_detail_edit" />
+
+    <fragment
+        android:id="@+id/nav_detail_edit"
+        android:name="com.mindorks.framework.mvvm.ui.main.history.DetailHistoryFragment"
+        android:label="label_detail"
+        tools:layout="@layout/fragment_detail_edit" />
+
     <fragment
         android:id="@+id/nav_update_info"
         android:name="com.mindorks.framework.mvvm.ui.main.information.UpdateInformationFragment"

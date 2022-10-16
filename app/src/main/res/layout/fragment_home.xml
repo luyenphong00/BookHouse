@@ -39,6 +39,31 @@
             app:layout_constraintStart_toEndOf="@id/image" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:padding="10dp"
+            android:text="Danh sách tìm kiếm"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcl_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/label1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +74,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image" />
+            app:layout_constraintTop_toBottomOf="@id/rcl_search" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/search"
@@ -57,7 +82,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/label1"
+            app:layout_constraintTop_toTopOf="@id/label2"
             app:srcCompat="@drawable/ic_baseline_search_24" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -71,30 +96,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/label1" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/label2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:padding="10dp"
-            android:text="Danh sách tìm kiếm"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rcl_house" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcl_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
