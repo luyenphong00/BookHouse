@@ -38,8 +38,8 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_bg_button"
         android:gravity="center"
-        android:text="Đặt phòng"
-        android:textColor="@android:color/white"
+        android:text="@string/t_ph_ng"
+        android:textColor="#616161"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -55,9 +55,10 @@
         android:background="@drawable/ic_bg_button"
         android:backgroundTint="#4B4B4E"
         android:gravity="center"
-        android:text="Hủy bỏ"
+        android:text="@string/h_y_b"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:targetApi="lollipop" />
 
 </RelativeLayout>

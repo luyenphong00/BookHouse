@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -70,15 +71,16 @@
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="4.300.000 đ"
-                    android:padding="10dp"
-                    android:inputType="number"
                     android:background="@drawable/ic_frame_36569"
                     android:backgroundTint="#E3E5E7"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:text="4.300.000 đ"
                     android:textColor="#21C3FF"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -91,15 +93,16 @@
                     android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ic_frame_36569"
+                    android:backgroundTint="#E3E5E7"
+                    android:inputType="number"
+                    android:padding="10dp"
                     android:text="0967123412"
                     android:textColor="#21C3FF"
                     android:textSize="14sp"
-                    android:padding="10dp"
-                    android:inputType="number"
-                    android:background="@drawable/ic_frame_36569"
-                    android:backgroundTint="#E3E5E7"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:ignore="TextContrastCheck" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -112,14 +115,15 @@
                     android:id="@+id/des"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ic_frame_36569"
+                    android:backgroundTint="#E3E5E7"
+                    android:padding="10dp"
                     android:text="Phòng họp mô tả"
                     android:textColor="#21C3FF"
                     android:textSize="14sp"
-                    android:padding="10dp"
-                    android:background="@drawable/ic_frame_36569"
-                    android:backgroundTint="#E3E5E7"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:ignore="TextContrastCheck" />
 
             </LinearLayout>
         </ScrollView>
@@ -141,7 +145,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_bg_button"
         android:backgroundTint="#FF9900"
@@ -152,7 +155,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/delete"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/delete"
@@ -160,7 +164,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_bg_button"
         android:gravity="center"
@@ -170,7 +173,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/edit" />
+        app:layout_constraintStart_toEndOf="@id/edit"
+        tools:ignore="TextContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

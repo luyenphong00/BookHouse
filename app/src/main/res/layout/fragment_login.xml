@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -12,10 +13,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            app:srcCompat="@drawable/ic_logo" />
+            app:srcCompat="@drawable/ic_logo"
+            tools:ignore="ImageContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/fullname"
@@ -25,11 +27,12 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/ic_frame_36569"
             android:hint="Tên đăng nhập"
-            android:text="Khac.tuan33@gmail.com"
             android:padding="8dp"
+            android:text="Khac.tuan33@gmail.com"
             android:textColor="@android:color/black"
             android:textColorHint="#454545"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:ignore="TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/pass"
@@ -43,7 +46,8 @@
             android:text="123@123"
             android:textColor="@android:color/black"
             android:textColorHint="#454545"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:ignore="TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/submit"
@@ -57,7 +61,8 @@
             android:text="Đăng nhập"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/register"
