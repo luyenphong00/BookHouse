@@ -47,15 +47,11 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
                             val bundler = Bundle()
                             it.data?.let { userModel ->
                                 var intent: Intent? = null
-                                if (userModel.admin != 0) {
-                                    intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                    bundler.putParcelable("param", resource.data.data)
-                                    intent.putExtras(bundler)
-                                    startActivity(intent)
-                                    finish()
-                                }else {
-                                    showToast(resource.message.toString())
-                                }
+                                intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                bundler.putParcelable("param", resource.data.data)
+                                intent.putExtras(bundler)
+                                startActivity(intent)
+                                finish()
                             }
 
                         } ?: kotlin.run {
