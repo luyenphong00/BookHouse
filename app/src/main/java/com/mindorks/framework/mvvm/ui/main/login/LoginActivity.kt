@@ -47,7 +47,7 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
                             val bundler = Bundle()
                             it.data?.let { userModel ->
                                 var intent: Intent? = null
-                                intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                intent = Intent(this@LoginActivity, MainNewActivity::class.java)
                                 bundler.putParcelable("param", resource.data.data)
                                 intent.putExtras(bundler)
                                 startActivity(intent)
