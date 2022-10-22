@@ -33,15 +33,6 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
                 }
             }
 
-            register.setOnClickListener {
-                if (binding.fullname.text.toString().isNotEmpty()
-                    && binding.pass.text.toString().isNotEmpty()) {
-                    viewModel.register(LoginBody(binding.fullname.text.toString(),
-                        binding.pass.text.toString()))
-                }else {
-                    showToast("Nhập đủ thông tin!")
-                }
-            }
         }
     }
 
@@ -56,15 +47,15 @@ class LoginActivity : CommonActivity<BaseViewModel, FragmentLoginBinding>() {
                             val bundler = Bundle()
                             it.data?.let { userModel ->
                                 var intent: Intent? = null
-                                if (userModel.admin == 0) {
-                                    intent = Intent(this@LoginActivity, MainNewActivity::class.java)
-                                } else if (userModel.admin == 1) {
+                                if (userModel.admin != 0) {
                                     intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                    bundler.putParcelable("param", resource.data.data)
+                                    intent.putExtras(bundler)
+                                    startActivity(intent)
+                                    finish()
+                                }else {
+                                    showToast(resource.message.toString())
                                 }
-                                bundler.putParcelable("param", resource.data.data)
-                                intent?.putExtras(bundler)
-                                startActivity(intent)
-                                finish()
                             }
 
                         } ?: kotlin.run {
