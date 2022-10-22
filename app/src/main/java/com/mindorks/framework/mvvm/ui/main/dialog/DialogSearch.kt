@@ -19,7 +19,7 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-data class ModelCallback(var timeStart: String, var timeEnd: String) : Parcelable
+data class ModelCallback(var timeStart: String, var timeEnd: String, var date: String) : Parcelable
 class DialogSearch(
     context: Context,
     var submit: (SearchRequest) -> Unit,
@@ -59,7 +59,8 @@ class DialogSearch(
                 callback.invoke(
                     ModelCallback(
                         binding.tvTime.text.toString(),
-                        binding.tvEnd.text.toString()
+                        binding.tvEnd.text.toString(),
+                        binding.tvCalendar.text.toString()
                     )
                 )
                 dismiss()

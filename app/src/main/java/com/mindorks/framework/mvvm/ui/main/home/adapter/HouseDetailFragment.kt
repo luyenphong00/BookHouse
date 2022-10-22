@@ -1,6 +1,5 @@
 package com.mindorks.framework.mvvm.ui.main.home.adapter
 
-import android.R
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -36,7 +35,7 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
     private var response: DataResponseDepartment? = null
     private val sharedViewModel by sharedViewModel<MainViewModel>()
     var picker: TimePickerDialog? = null
-    var  calendar = Calendar.getInstance()
+    var calendar = Calendar.getInstance()
     var lastSelectedYear = calendar.get(Calendar.YEAR)
     var lastSelectedMonth = calendar.get(Calendar.MONTH)
     var lastSelectedDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
@@ -50,13 +49,15 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
     override fun initEvent() {
         super.initEvent()
         binding.submit.setOnClickListener {
-            if (selectTimeStart && selectTimeEnd && selectCalendar){
+            if (selectTimeStart && selectTimeEnd && selectCalendar) {
                 val meetTingRoom = RoomBock(
                     response?.id,
                     adapterUser?.getLstUser().toString(),
                     getDataRentalServices(),
                     getDataRentalEquipment(),
-                    binding.tvTime.text.toString(), binding.tvEnd.text.toString(), binding.tvCalendar.text.toString()
+                    binding.tvTime.text.toString(),
+                    binding.tvEnd.text.toString(),
+                    binding.tvCalendar.text.toString()
                 )
                 val totalMoney = (adapterService?.getTotalMoney()?.toLong()?.let { it1 ->
                     adapterEquiment?.getTotalMoney()?.toLong()
@@ -66,7 +67,7 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                 DialogCheckLink(requireContext(), totalMoney) {
                     viewModel.rent(meetTingRoom)
                 }.show()
-            }else {
+            } else {
                 showMessage("Chọn đủ thông tin")
             }
         }
@@ -133,9 +134,9 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                     replateDays = "0${replateDays}"
                 }
                 var replaceMonth = ""
-                replaceMonth = if ((monthOfYear + 1).toString().length == 1){
+                replaceMonth = if ((monthOfYear + 1).toString().length == 1) {
                     "0${monthOfYear + 1}"
-                }else {
+                } else {
                     (monthOfYear + 1).toString()
                 }
                 binding.tvCalendar.text = "${year}-${replaceMonth}-${replateDays}"
@@ -185,6 +186,10 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
             arguments?.getParcelable<ModelCallback>("modelcallback")?.let {
                 tvTime.text = it.timeStart
                 tvEnd.text = it.timeEnd
+                tvCalendar.text = it.date
+                selectTimeStart = true
+                selectTimeEnd = true
+                selectCalendar = true
             }
         }
 
@@ -257,15 +262,15 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                         showLoading(false)
                         source.data?.let { res ->
                             findNavController().popBackStack()
-                            showMessage(res.message?:"")
+                            showMessage(res.message ?: "")
                         } ?: kotlin.run {
-                            showMessage(source.message?:"")
+                            showMessage(source.message ?: "")
                         }
 
                     }
                     Status.ERROR -> {
                         showLoading(false)
-                        showMessage(source.message?:"")
+                        showMessage(source.message ?: "")
                     }
                     Status.LOADING -> {
                         showLoading(true)
