@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Parcelable
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,11 +15,16 @@ import android.widget.Toast
 import com.mindorks.framework.mvvm.R
 import com.mindorks.framework.mvvm.data.model.SearchRequest
 import com.mindorks.framework.mvvm.databinding.DialogSearchBinding
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
+data class ModelCallback(var timeStart: String, var timeEnd: String) : Parcelable
 class DialogSearch(
     context: Context,
-    var submit: (SearchRequest) -> Unit
+    var submit: (SearchRequest) -> Unit,
+    var callback: (ModelCallback) -> Unit
+
 ) : Dialog(context, R.style.MaterialDialogSheet) {
 
     private val binding = DialogSearchBinding.inflate(LayoutInflater.from(context))
@@ -48,6 +54,12 @@ class DialogSearch(
                         binding.tvTime.text.toString(),
                         binding.tvEnd.text.toString(),
                         binding.tvCalendar.text.toString(),
+                    )
+                )
+                callback.invoke(
+                    ModelCallback(
+                        binding.tvTime.text.toString(),
+                        binding.tvEnd.text.toString()
                     )
                 )
                 dismiss()
@@ -108,8 +120,8 @@ class DialogSearch(
         }
     }
 
-    fun showMessage(message : String){
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show()
+    fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun buttonSelectDate() {

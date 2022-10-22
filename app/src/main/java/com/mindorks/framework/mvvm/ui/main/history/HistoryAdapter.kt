@@ -51,6 +51,7 @@ class HistoryAdapter(
             Glide.with(context)
                 .load(linkUrl)
                 .into(binding.image)
+            time.text = "${item.hour_start}-${item.hour_end}-${item.date}"
 
             ivDelete.setOnClickListener {
                 delete.invoke(item)

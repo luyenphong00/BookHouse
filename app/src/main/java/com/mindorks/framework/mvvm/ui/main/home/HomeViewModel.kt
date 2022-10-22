@@ -3,11 +3,9 @@ package com.mindorks.framework.mvvm.ui.main.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.mindorks.framework.mvvm.common.BaseViewModel
-import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
-import com.mindorks.framework.mvvm.data.model.DepartmentsModel
-import com.mindorks.framework.mvvm.data.model.SearchRequest
-import com.mindorks.framework.mvvm.data.model.User
+import com.mindorks.framework.mvvm.data.model.*
 import com.mindorks.framework.mvvm.data.repository.MainRepository
 import com.mindorks.framework.mvvm.utils.NetworkHelper
 import com.mindorks.framework.mvvm.utils.Resource
@@ -51,7 +49,7 @@ class HomeViewModel(
                             Resource.error(it.errorBody().toString(), null)
                         )
                     }
-                }catch (e : Exception){
+                } catch (e: Exception) {
                     meetingRoomsResponse.postValue(Resource.error(e.toString(), null))
                 }
             } else meetingRoomsResponse.postValue(Resource.error("No internet connection", null))
@@ -79,15 +77,15 @@ class HomeViewModel(
                         } else {
                             lstHouseUpdate.postValue(Resource.error("No internet connection", null))
                         }
-                    }catch (e : Exception){
-                        lstHouseUpdate.postValue(Resource.error(e.message?:"", null))
+                    } catch (e: Exception) {
+                        lstHouseUpdate.postValue(Resource.error(e.message ?: "", null))
                     }
                 }
             } else lstHouseUpdate.postValue(Resource.error("No internet connection", null))
         }
     }
 
-    fun search(body : SearchRequest) {
+    fun search(body: SearchRequest) {
         viewModelScope.launch(IO) {
             lstSearch.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
@@ -104,11 +102,17 @@ class HomeViewModel(
                                 }
                             }
                             lstSearch.postValue(Resource.success(lstHouseSearch))
-                        } else lstSearch.postValue(
-                            Resource.error(it.errorBody().toString(), null)
-                        )
+                        } else {
+                            val errorModel = Gson().fromJson(
+                                response.errorBody().toString(),
+                                BaseModel::class.java
+                            )
+                            lstSearch.postValue(
+                                Resource.error(errorModel.message?:"", null)
+                            )
+                        }
                     }
-                }catch (e : Exception){
+                } catch (e: Exception) {
                     lstSearch.postValue(Resource.error(e.toString(), null))
                 }
             } else lstSearch.postValue(Resource.error("No internet connection", null))

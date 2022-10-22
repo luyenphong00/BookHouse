@@ -10,6 +10,7 @@ import com.mindorks.framework.mvvm.data.model.DataResponseDepartment
 import com.mindorks.framework.mvvm.data.model.SearchRequest
 import com.mindorks.framework.mvvm.databinding.FragmentHomeBinding
 import com.mindorks.framework.mvvm.ui.main.dialog.DialogSearch
+import com.mindorks.framework.mvvm.ui.main.dialog.ModelCallback
 import com.mindorks.framework.mvvm.ui.main.home.adapter.HouseAdapter
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import com.mindorks.framework.mvvm.utils.Status
@@ -22,6 +23,9 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
     private var houseAdapterType2: HouseAdapter? = null
     override val viewModel: HomeViewModel by viewModel()
     private val sharedViewModel by sharedViewModel<MainViewModel>()
+    var timeStart = ""
+    var timeEnd = ""
+    var modelCallback : ModelCallback? = null
 
     override fun getViewBinding(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -42,6 +46,7 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
         houseAdapterType2 = HouseAdapter(requireContext(), 0) {
             val bundle = Bundle()
             bundle.putParcelable("obj",it)
+            bundle.putParcelable("modelcallback",modelCallback)
             findNavController().navigate(R.id.action_nav_home_to_nav_detail,bundle)
         }
         with(binding) {
@@ -104,11 +109,14 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
                         resource.data?.let { result ->
                             if (result.isNotEmpty()) {
                                 houseAdapterType2?.updateData(result as ArrayList<DataResponseDepartment>)
+                            }else {
+                                houseAdapterType2?.updateData(ArrayList())
                             }
                         }
                         getMainActivity()?.showLoading(false)
                     }
                     Status.ERROR -> {
+                        showMessage(resource.message?:"")
                         getMainActivity()?.showLoading(false)
                     }
                     Status.LOADING -> {
@@ -120,9 +128,14 @@ class HomeFragment : CommonFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     fun showSearch(){
-        DialogSearch(requireContext()) {
+        DialogSearch(requireContext(),{
             viewModel.search(it)
-        }.show()
+        },{ callback ->
+            timeStart = callback.timeStart
+            timeEnd = callback.timeEnd
+            modelCallback = callback
+        }).show()
+
     }
 
     override fun onDestroyView() {

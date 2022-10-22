@@ -17,6 +17,7 @@ import com.mindorks.framework.mvvm.databinding.FragmentDetailBinding
 import com.mindorks.framework.mvvm.ui.main.adapter.DeviceAdapter
 import com.mindorks.framework.mvvm.ui.main.adapter.UserAdapter
 import com.mindorks.framework.mvvm.ui.main.dialog.DialogCheckLink
+import com.mindorks.framework.mvvm.ui.main.dialog.ModelCallback
 import com.mindorks.framework.mvvm.ui.main.viewmodel.DetailModel
 import com.mindorks.framework.mvvm.ui.main.viewmodel.MainViewModel
 import com.mindorks.framework.mvvm.utils.Status
@@ -180,6 +181,10 @@ class HouseDetailFragment : CommonFragment<FragmentDetailBinding, BaseViewModel>
                     .load(linkUrl)
                     .into(img)
                 response = it
+            }
+            arguments?.getParcelable<ModelCallback>("modelcallback")?.let {
+                tvTime.text = it.timeStart
+                tvEnd.text = it.timeEnd
             }
         }
 
